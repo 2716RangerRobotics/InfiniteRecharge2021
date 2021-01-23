@@ -82,4 +82,11 @@ public final class Constants {
     //color wheel
     public static final double COLOR_WHEEL_MAX_POSITION = 50.0;
     public static final double COLOR_WHEEL_MIN_POSITION = 0.0;
+
+    public static final double MOTION_PROFILE_PERIOD = 0.01;
+    
+	public static final double DRIVE_P_VALUE = 1.8;
+	public static final double DRIVE_D_VALUE = 0.0;
+	public static final double DRIVE_V_VALUE = 0.067;
+	public static final double DRIVE_A_VALUE = 0.034;
 }

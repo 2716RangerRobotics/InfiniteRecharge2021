@@ -7,9 +7,9 @@
 
 package frc.robot.subsystems;
 
-// import com.revrobotics.ColorMatch;
-// import com.revrobotics.ColorMatchResult;
-// import com.revrobotics.ColorSensorV3;
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorSensorV3;
 //import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -26,7 +26,7 @@ public class ColorWheelSpinner extends SubsystemBase {
   // VictorSPX wheelMotor;
   // VictorSPX liftMotor;
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  // private ColorSensorV3 colorSensor;
+  private ColorSensorV3 colorSensor;
   Servo yourActuator;
   DigitalInput bottomBaseLimit;
   DigitalInput topBaseLimit;
@@ -40,15 +40,15 @@ public class ColorWheelSpinner extends SubsystemBase {
    * This object uses a simple euclidian distance to estimate the closest match
    * with given confidence range.
    */
-  // private final ColorMatch colorMatcher = new ColorMatch();
+  private final ColorMatch colorMatcher = new ColorMatch();
   /**
    * Note: Any example colors should be calibrated as the user needs, these
    * are here as a basic example.
-  //  */
-  // private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  // private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  // private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  // private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+   */
+  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   static final double SPIN_COLOR_WHEEL_POSITION = 25;
 
@@ -56,11 +56,11 @@ public class ColorWheelSpinner extends SubsystemBase {
    * Creates a new ColorWheelSpinner.
    */
   public ColorWheelSpinner() {
-    // colorSensor = new ColorSensorV3(i2cPort);
-    // colorMatcher.addColorMatch(kBlueTarget);
-    // colorMatcher.addColorMatch(kGreenTarget);
-    // colorMatcher.addColorMatch(kRedTarget);
-    // colorMatcher.addColorMatch(kYellowTarget); 
+    colorSensor = new ColorSensorV3(i2cPort);
+    colorMatcher.addColorMatch(kBlueTarget);
+    colorMatcher.addColorMatch(kGreenTarget);
+    colorMatcher.addColorMatch(kRedTarget);
+    colorMatcher.addColorMatch(kYellowTarget); 
     
     yourActuator = new Servo(Constants.YOUR_ACTUATOR_CHANNEL);
     yourActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
@@ -89,31 +89,31 @@ public class ColorWheelSpinner extends SubsystemBase {
      */
 
 
-    // Color detectedColor = colorSensor.getColor();
+    Color detectedColor = colorSensor.getColor();
     // System.out.println(detectedColor);
 
     /**
      * Run the color match algorithm on our detected color
      */
     
-    // ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+    ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
 
-    // if (match.color == kBlueTarget) {
-    //   colorString = "B";
-    //   // System.out.println("Blue");
-    // } else if (match.color == kRedTarget) {
-    //   colorString = "R";
-    //   // System.out.println("Red");
-    // } else if (match.color == kGreenTarget) {
-    //   colorString = "G";
-    //   // System.out.println("Green");
-    // } else if (match.color == kYellowTarget) {
-    //   colorString = "Y";
-    //   // System.out.println("Yellow");
-    // } else {
-    //   colorString = "U";
-    //   // System.out.println("Unknown");
-    // }
+    if (match.color == kBlueTarget) {
+      colorString = "B";
+      // System.out.println("Blue");
+    } else if (match.color == kRedTarget) {
+      colorString = "R";
+      // System.out.println("Red");
+    } else if (match.color == kGreenTarget) {
+      colorString = "G";
+      // System.out.println("Green");
+    } else if (match.color == kYellowTarget) {
+      colorString = "Y";
+      // System.out.println("Yellow");
+    } else {
+      colorString = "U";
+      // System.out.println("Unknown");
+    }
 
 
     /**
