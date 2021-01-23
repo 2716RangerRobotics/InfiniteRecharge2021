@@ -199,6 +199,14 @@ public class Drive extends SubsystemBase {
     return leftEncoder.getPosition();
   }
 
+  public double getRightVelocity(){
+    return 0.0;//TODO:Poll the encoder for the velocity
+  }
+
+  public double getLeftVelocity(){
+    return 0.0;//TODO:Poll the encoder for the velocity
+  }
+
   public void resetLeftEncoder() {
     leftEncoder.setPosition(0.0);
   }
