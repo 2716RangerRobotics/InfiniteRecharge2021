@@ -98,8 +98,8 @@ public class DriveStraightToDistance extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interupted) {
-     RobotContainer.drive.arcadeDrive(0, 0, false);
-     RobotContainer.drive.resetLeftEncoder();
+    RobotContainer.drive.arcadeDrive(0, 0, false);
+    RobotContainer.drive.resetLeftEncoder();
     RobotContainer.drive.resetRightEncoder();
   }
 

@@ -83,7 +83,7 @@ public class Drive extends SubsystemBase {
     // if(DriverStation.getInstance().isAutonomous()||DriverStation.getInstance().isTest()){
       SmartDashboard.putNumber("Gyro", (int)imu.getYaw());
       SmartDashboard.putNumber("DriveEnc", getLeftPosition());
-      SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
+      // SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
 
     // }
   }
@@ -102,6 +102,8 @@ public class Drive extends SubsystemBase {
       rightMotorFollower.setIdleMode(IdleMode.kCoast);
     }
   }
+
+
   public boolean isColorWheelLimit() {
     if(!colorWheelLimit.get()){
       return true;
@@ -110,6 +112,8 @@ public class Drive extends SubsystemBase {
       return false;
     }
   }
+
+
   public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
     // local variables to hold the computed PWM values for the motors
     double leftMotorSpeed;
@@ -122,16 +126,8 @@ public class Drive extends SubsystemBase {
     if (squaredInputs) {
       // square the inputs (while preserving the sign) to increase fine control
       // while permitting full power
-      if (moveValue >= 0.0) {
-        moveValue = moveValue * moveValue;
-      } else {
-        moveValue = -(moveValue * moveValue);
-      }
-      if (rotateValue >= 0.0) {
-        rotateValue = rotateValue * rotateValue;
-      } else {
-        rotateValue = -(rotateValue * rotateValue);
-      }
+      moveValue = moveValue * moveValue * Math.signum(moveValue);
+      rotateValue = rotateValue * rotateValue * Math.signum(rotateValue);
     }
 
     if (moveValue > 0.0) {
