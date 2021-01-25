@@ -4,12 +4,19 @@
 
 package frc.robot.commands;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class DriveMotionProfile extends CommandBase {
   private volatile boolean isFinished = false;
@@ -20,9 +27,9 @@ public class DriveMotionProfile extends CommandBase {
 	private volatile double prevErrorR = 0;
   /** Creates a new DriveMotionProfile. */
   public DriveMotionProfile(String filename) {
-      addRequirement(RobotController.drive);
-      this.leftMotion = MotionProfiles.loadProfile(filename + "_left");
-      this.rightMotion = MotionProfiles.loadProfile(filename + "_right");
+      addRequirements(RobotContainer.drive);
+      this.leftMotion = loadProfile(filename + "_left");
+	  this.rightMotion = loadProfile(filename + "_right");
   }
     // Use addRequirements() here to declare subsystem dependencies.
   
@@ -32,32 +39,31 @@ public class DriveMotionProfile extends CommandBase {
   public void initialize() {
     RobotContainer.drive.resetLeftEncoder();
     RobotContainer.drive.resetRightEncoder();
-		SmartDashboard.putBoolean("PathRunning", true);
-		isFinished = false;
-		i = 0;
-		prevErrorL = 0;
-		prevErrorR = 0;
+	SmartDashboard.putBoolean("PathRunning", true);
+	isFinished = false;
+	i = 0;
+	prevErrorL = 0;
+	prevErrorR = 0;
+	
+	if (leftMotion.length != rightMotion.length) {
+		System.out.println("Left and right profiles not of equal length!");
+		this.cancel();
+		return;
+	}
 
-		if (leftMotion.length != rightMotion.length) {
-			System.out.println("Left and right profiles not of equal length!");
-			this.cancel();
-			return;
-		}
-
-		new Thread(() -> {
-			double lastTime = 0;
-
-			while (!isFinished && DriverStation.getInstance().isEnabled()) {
-				if (Timer.getFPGATimestamp() >= lastTime + Constants.MOTION_PROFILE_PERIOD) {
-					lastTime = Timer.getFPGATimestamp();
-					threadedExecute();
-				}
-				try {
-					Thread.sleep(2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+	new Thread(() -> {
+		double lastTime = 0;
+		while (!isFinished && DriverStation.getInstance().isEnabled()) {
+			if (Timer.getFPGATimestamp() >= lastTime + Constants.MOTION_PROFILE_PERIOD) {
+				lastTime = Timer.getFPGATimestamp();
+				threadedExecute();
 			}
+			try {
+				Thread.sleep(2);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
     }).start();
   }
   protected synchronized void threadedExecute() {
@@ -129,4 +135,38 @@ public class DriveMotionProfile extends CommandBase {
   public boolean isFinished() {
     return isFinished;
   }
+
+  
+	/**
+	 * Load a pre-generated motion profile from a text file
+	 * 
+	 * @param profileName The name of the file to load
+	 * @return The motion profile contained in the file
+	 */
+	public static double[][] loadProfile(String profileName) {
+		double[][] profile = new double[][] {};
+		try (BufferedReader br = new BufferedReader(
+				new FileReader(new File(Filesystem.getDeployDirectory(), "paths/" + profileName + ".csv")))) {
+			ArrayList<double[]> points = new ArrayList<double[]>();
+
+			String line = "";
+			while ((line = br.readLine()) != null) {
+				String[] pointString = line.split(",");
+				double[] point = new double[3];
+				for (int i = 0; i < 3; i++) {
+					point[i] = Double.parseDouble(pointString[i]);
+				}
+				points.add(point);
+			}
+			profile = new double[points.size()][3];
+			for (int i = 0; i < points.size(); i++) {
+				profile[i][0] = points.get(i)[0];
+				profile[i][1] = points.get(i)[1];
+				profile[i][2] = points.get(i)[2];
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return profile;
+	}
 }
