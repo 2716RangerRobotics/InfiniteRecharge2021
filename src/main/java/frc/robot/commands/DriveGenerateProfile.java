@@ -4,14 +4,22 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class DriveGenerateProfile extends CommandBase {
   private double[][] leftMotion;
   private double[][] rightMotion;
   private volatile boolean isFinished = false;
-	private volatile int i = 0;
+  private volatile int i = 0;
+  private volatile double prevPosRight = 0.0;
+  private volatile double prevPosLeft = 0.0;
+  private volatile double prevVelocityRight = 0.0;
+  private volatile double prevVelocityLeft = 0.0;
 
   /** Creates a new DriveGenerateProfile. */
   public DriveGenerateProfile(int totalLength,String filename) {
@@ -47,7 +55,15 @@ public class DriveGenerateProfile extends CommandBase {
   protected synchronized void threadedExecute() {
     if (i < leftMotion.length) {
       leftMotion[i][0] = RobotContainer.drive.getLeftPosition();
+      leftMotion[i][1] = (leftMotion[i][0] - prevPosLeft) / Constants.MOTION_PROFILE_PERIOD;
+      leftMotion[i][2] = (leftMotion[i][1] - prevVelocityLeft) / Constants.MOTION_PROFILE_PERIOD;
       rightMotion[i][0] = RobotContainer.drive.getRightPosition();
+      rightMotion[i][1] = (rightMotion[i][1] - prevPosRight) / Constants.MOTION_PROFILE_PERIOD;
+      rightMotion[i][2] = (rightMotion[i][1] - prevVelocityRight) / Constants.MOTION_PROFILE_PERIOD;
+      prevPosLeft = leftMotion[i][0];
+      prevPosRight = rightMotion[i][0];
+      prevVelocityLeft = leftMotion[i][1];
+      prevVelocityRight = rightMotion[i][1];
       i++;
     }else{
       isFinished = true;
