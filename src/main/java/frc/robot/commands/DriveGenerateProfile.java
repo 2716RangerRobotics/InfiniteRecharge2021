@@ -20,9 +20,10 @@ public class DriveGenerateProfile extends CommandBase {
   private volatile double prevPosLeft = 0.0;
   private volatile double prevVelocityRight = 0.0;
   private volatile double prevVelocityLeft = 0.0;
+  private String fileName;
 
   /** Creates a new DriveGenerateProfile. */
-  public DriveGenerateProfile(int totalLength,String filename) {
+  public DriveGenerateProfile(int totalLength) {
     addRequirements(RobotContainer.drive);
     leftMotion = new double[totalLength][3];
     rightMotion = new double[totalLength][3];  
@@ -33,7 +34,8 @@ public class DriveGenerateProfile extends CommandBase {
   public void initialize() {
     RobotContainer.drive.resetLeftEncoder();
     RobotContainer.drive.resetRightEncoder();
-	  SmartDashboard.putBoolean("PathWriting", true);
+    SmartDashboard.putBoolean("PathWriting", true);
+    fileName = SmartDashboard.getString("fileName", "deafaultFile");
 	  isFinished = false;
 	  i = 0;
 	
@@ -73,18 +75,21 @@ public class DriveGenerateProfile extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {    
-    double driveValueFast = RobotContainer.getDriverLeftStickY();
-    double turnValueFast = RobotContainer.getDriverLeftStickX();
+    double driveValueFast = RobotContainer.getDriverLeftStickY() *.8;
+    double turnValueFast = RobotContainer.getDriverLeftStickX() *.8;
     RobotContainer.drive.arcadeDrive(driveValueFast, turnValueFast, true);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    isFinished = true;
+    fileName = SmartDashboard.getString("fileName", "deafaultFile");
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isFinished;
   }
 }

@@ -56,7 +56,7 @@ public class Drive extends SubsystemBase {
     rightMotorMaster.enableVoltageCompensation(12.5);
 
     rightEncoder = rightMotorMaster.getEncoder();
-    leftEncoder = leftMotorMaster.getEncoder();
+    leftEncoder = leftMotorMaster.getEncoder();                                                                                             
 
     rightEncoder.setPositionConversionFactor(1.6866);
     leftEncoder.setPositionConversionFactor(1.6866);
