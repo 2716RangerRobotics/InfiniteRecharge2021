@@ -60,6 +60,7 @@ import frc.robot.subsystems.BallTilt;
 import frc.robot.subsystems.ColorWheelSpinner;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.BallHandle;
+import frc.robot.subsystems.Shooter;
 // import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.HangingMechanism;
 import frc.robot.subsystems.Limelight;
@@ -77,7 +78,7 @@ public class RobotContainer {
   public static BallIntake ballIntake;
   public static BallHandle ballHandle;
   public static BallTilt ballTilt;
-  
+  public static Shooter shooter;
   public static ColorWheelSpinner colorWheelSpinner;
 
   public static Limelight limelight;
@@ -132,6 +133,7 @@ public class RobotContainer {
     ballIntake = new BallIntake();
     ballHandle = new BallHandle();
     ballTilt = new BallTilt();
+    shooter = new Shooter();
     colorWheelSpinner = new ColorWheelSpinner();
     CommandScheduler.getInstance().setDefaultCommand(drive, new DriveWithGamePad());
     
