@@ -32,8 +32,8 @@ public class Drive extends SubsystemBase {
   CANEncoder rightEncoder;
   CANEncoder leftEncoder;
   private AHRS imu;
-  public static final double FeedForward = 0.18;
-  public static final double kProportion = 0.025;
+  public static final double FeedForward = 0.0;//18;
+  public static final double kProportion = 0.018;
   DigitalInput colorWheelLimit;
 
   /**
