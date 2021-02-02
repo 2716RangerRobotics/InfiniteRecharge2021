@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -35,6 +36,7 @@ public class Drive extends SubsystemBase {
   public static final double FeedForward = 0.0;//18;
   public static final double kProportion = 0.018;
   DigitalInput colorWheelLimit;
+  private PIDController spinController;
 
   /**
    * Creates a new Drive.
@@ -73,6 +75,8 @@ public class Drive extends SubsystemBase {
     rightMotorMaster.setOpenLoopRampRate(Constants.RAMP_RATE);
     rightMotorFollower.setOpenLoopRampRate(Constants.RAMP_RATE);
 
+    spinController = new PIDController(Constants.DRIVE_SPIN_P, Constants.DRIVE_SPIN_I, Constants.DRIVE_SPIN_D);
+
     // leftMotorMaster.setOpenLoopRampRate(rate);
     colorWheelLimit = new DigitalInput(Constants.EXTEND_LIMIT);
   }
@@ -110,6 +114,18 @@ public class Drive extends SubsystemBase {
       return false;
     }
   }
+
+  public void driveWithSpinPID(double moveSpeed, double targetAngle) {
+    this.arcadeDrive(moveSpeed, 
+      spinController.calculate(this.getAngle(), targetAngle), false);
+  }
+
+  /**
+   * takes forward-backward and side to side values and drives the robot with them
+   * @param moveValue forward-back speed, from -1 to 1, where 0 is stop
+   * @param rotateValue side to side speed, from -1 to 1, where 0 is stop
+   * @param squaredInputs whether or not inputs are sqaured, with sign retention
+   */
   public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
     // local variables to hold the computed PWM values for the motors
     double leftMotorSpeed;

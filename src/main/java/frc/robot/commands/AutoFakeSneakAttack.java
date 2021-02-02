@@ -44,4 +44,6 @@ public class AutoFakeSneakAttack extends SequentialCommandGroup {
         )
     );
   }
+  //set up infront of human player station so the balls are straight ahead of the robot
+  //this fakes the sneak attack and goes to shoot at the lower port
 }

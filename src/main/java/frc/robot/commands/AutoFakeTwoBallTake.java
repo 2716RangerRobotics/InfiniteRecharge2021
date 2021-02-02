@@ -46,3 +46,5 @@ public class AutoFakeTwoBallTake extends SequentialCommandGroup {
     );
   }
 }
+//acts like we are going to take balls but instead shoot them
+//starts in front of human player station roughly
