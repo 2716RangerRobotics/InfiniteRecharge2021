@@ -66,6 +66,10 @@ public class DriveMotionProfile extends CommandBase {
 		}
     }).start();
   }
+
+  /**
+   * the method that the thread runs on a loop, it drives a motion profile.
+   */
   protected synchronized void threadedExecute() {
 		if (i == 24) {
 			if (RobotContainer.drive.getLeftPosition() == 0) {
