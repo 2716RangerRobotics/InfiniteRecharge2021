@@ -120,6 +120,9 @@ public class Drive extends SubsystemBase {
       spinController.calculate(this.getAngle(), targetAngle), false);
   }
 
+  public void resetSpinPID(){
+    spinController.reset();
+  }
   //TODO:Write a method "resetSpinPID" that returns void, in its body all it should do is call the reset() method of the spinControlller 
 
   /**
