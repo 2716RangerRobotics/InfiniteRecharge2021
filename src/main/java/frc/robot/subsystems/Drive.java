@@ -221,11 +221,11 @@ public class Drive extends SubsystemBase {
   }
 
   public double getRightVelocity(){
-    return 0.0;//TODO:Poll the encoder for the velocity
+    return  rightEncoder.getVelocity();
   }
 
   public double getLeftVelocity(){
-    return 0.0;//TODO:Poll the encoder for the velocity
+    return  leftEncoder.getVelocity();
   }
 
   public void resetLeftEncoder() {
