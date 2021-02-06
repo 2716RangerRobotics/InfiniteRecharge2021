@@ -31,6 +31,7 @@ import frc.robot.commands.DriveStop;
 import frc.robot.commands.DriveStraightToDistance;
 import frc.robot.commands.DriveToWheelPosition;
 import frc.robot.commands.DriveTurnToAngle;
+import frc.robot.commands.DriveTurnToAngle3;
 import frc.robot.commands.DriveWithGamePad;
 import frc.robot.commands.LimelightLEDOff;
 import frc.robot.commands.LimelightLEDOn;
@@ -148,8 +149,8 @@ public class RobotContainer {
     // driverSTART8.whenPressed(new ColorWheelSpinnerLiftUp());
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
-    driverDLeft.whenPressed(new DriveTurnToAngle(-25, .25));
-    driverDRight.whenPressed(new DriveTurnToAngle(25, .25));
+    driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
+    driverDRight.whenPressed(new DriveTurnToAngle3(90));
   
     coDriverA1.whenPressed(new BallHandleIntake());
     coDriverA1.whenReleased(new BallHandleUpperStop());

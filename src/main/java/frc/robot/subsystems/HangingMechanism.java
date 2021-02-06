@@ -34,19 +34,19 @@ static final double HANGING_RETRACT_POSITION = -1000000.0;
     leftServo = new Servo(Constants.HANGING_MECH_LEFT_SERVO);
     rightServo = new Servo(Constants.HANGING_MECH_RIGHT_SERVO);
 
-    leftHangingMotor = new TalonSRX(Constants.CLIMBING_LEFT_MOTOR);
-    leftHangingMotor.setInverted(true);
-    rightHangingMotor = new TalonSRX(Constants.CLIMBING_RIGHT_MOTOR);
-    leftHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    rightHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    leftHangingMotor.configFactoryDefault();
-    leftHangingMotor.configVoltageCompSaturation(12.5);
-    leftHangingMotor.enableVoltageCompensation(true);
-    rightHangingMotor.configFactoryDefault();
-    rightHangingMotor.configVoltageCompSaturation(12.5);
-    rightHangingMotor.enableVoltageCompensation(true);
-    resetLeftEncoder();
-    resetRightEncoder();
+    // leftHangingMotor = new TalonSRX(Constants.CLIMBING_LEFT_MOTOR);
+    // leftHangingMotor.setInverted(true);
+    // rightHangingMotor = new TalonSRX(Constants.CLIMBING_RIGHT_MOTOR);
+    // leftHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    // rightHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    // leftHangingMotor.configFactoryDefault();
+    // leftHangingMotor.configVoltageCompSaturation(12.5);
+    // leftHangingMotor.enableVoltageCompensation(true);
+    // rightHangingMotor.configFactoryDefault();
+    // rightHangingMotor.configVoltageCompSaturation(12.5);
+    // rightHangingMotor.enableVoltageCompensation(true);
+    // resetLeftEncoder();
+    // resetRightEncoder();
 
     //leftHangingMotor.config_kP(0, 1.0);
     // leftHangingMotor.config_kI(0, 0.0);
@@ -89,8 +89,8 @@ static final double HANGING_RETRACT_POSITION = -1000000.0;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("ClimbLeftEnc", getLeftEncoder());
-    SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
+    // SmartDashboard.putNumber("ClimbLeftEnc", getLeftEncoder());
+    // SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
   }
 
 public void hangingExtendDistance(){

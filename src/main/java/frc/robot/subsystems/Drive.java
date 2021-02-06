@@ -33,7 +33,7 @@ public class Drive extends SubsystemBase {
   CANEncoder rightEncoder;
   CANEncoder leftEncoder;
   private AHRS imu;
-  public static final double FeedForward = 0.0;//18;
+  public static final double FeedForward = 0.04;//18;
   public static final double kProportion = 0.018;
   DigitalInput colorWheelLimit;
   private PIDController spinController;
@@ -76,7 +76,7 @@ public class Drive extends SubsystemBase {
     rightMotorFollower.setOpenLoopRampRate(Constants.RAMP_RATE);
 
     spinController = new PIDController(Constants.DRIVE_SPIN_P, Constants.DRIVE_SPIN_I, Constants.DRIVE_SPIN_D);
-
+    
     // leftMotorMaster.setOpenLoopRampRate(rate);
     colorWheelLimit = new DigitalInput(Constants.EXTEND_LIMIT);
   }
@@ -116,10 +116,17 @@ public class Drive extends SubsystemBase {
   }
 
   public void driveWithSpinPID(double moveSpeed, double targetAngle) {
-    this.arcadeDrive(moveSpeed, 
-      spinController.calculate(this.getAngle(), targetAngle), false);
+    double spinOutput = -1.0*spinController.calculate(this.getAngle(), targetAngle);
+    if(spinOutput < 0){
+      this.arcadeDrive(moveSpeed,spinOutput - FeedForward, false);
+    }else{
+      this.arcadeDrive(moveSpeed, spinOutput + FeedForward, false);
+    }
   }
 
+  public boolean atSpinPIDSetpoint(){
+    return spinController.atSetpoint();
+  }
   public void resetSpinPID(){
     spinController.reset();
   }

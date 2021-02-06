@@ -39,6 +39,8 @@ public class DriveTurnToAngle3 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(RobotContainer.drive.getAngle() - adjustedAngle) <= 1;
+    return RobotContainer.drive.atSpinPIDSetpoint();
+    // return Math.abs(RobotContainer.drive.getAngle() - adjustedAngle) <= 1;
+    // return false;
     }
 }
