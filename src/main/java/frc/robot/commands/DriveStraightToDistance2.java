@@ -7,12 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-//TODO:copy DriveStraightToDistance fields/constructors/initialize/end
+
 public class DriveStraightToDistance2 extends CommandBase {
   private double distance;
 	private double speed;
 	private boolean isReverse;
-  private double startAngle;
   private boolean isAngleTargeted;
   private double targetAngle;
   /** Creates a new DriveStraightToDistance2. */
@@ -34,7 +33,7 @@ public class DriveStraightToDistance2 extends CommandBase {
     this.distance = distanceInInches;
     this.speed = speed;
     addRequirements(RobotContainer.drive);
-    this.startAngle = angle;
+    this.targetAngle = angle;
     isAngleTargeted = true;
     if (speed < 0) isReverse = true;
   }
@@ -56,14 +55,13 @@ public class DriveStraightToDistance2 extends CommandBase {
   public void execute() {
     // System.out.println(startAngle + ", " + drive.getAngle());
    RobotContainer.drive.driveWithSpinPID(speed, targetAngle);
-    //TODO:Rather than copying the other Command, call the driveWithSpinPID()
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.drive.arcadeDrive(0, 0, false);
-     RobotContainer.drive.resetLeftEncoder();
+    RobotContainer.drive.resetLeftEncoder();
     RobotContainer.drive.resetRightEncoder();
   }
 
