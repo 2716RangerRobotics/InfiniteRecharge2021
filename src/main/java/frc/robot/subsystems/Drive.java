@@ -115,6 +115,12 @@ public class Drive extends SubsystemBase {
   public Pose2d getCurrentPos(){
     return currentPos;
   }
+  public void resetOdometry(Pose2d pos0){
+    this.resetLeftEncoder();
+    this.resetRightEncoder();
+    odometry.resetPosition(pos0, imu.getRotation2d());
+  }
+
   public boolean isColorWheelLimit() {
     if(!colorWheelLimit.get()){
       return true;
