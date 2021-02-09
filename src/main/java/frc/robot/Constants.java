@@ -94,8 +94,8 @@ public final class Constants {
 
     public static final double MOTION_PROFILE_PERIOD = 0.01;
     
-	public static final double DRIVE_P_VALUE = 1.8;
+	public static final double DRIVE_P_VALUE = .505;//1.8;
 	public static final double DRIVE_D_VALUE = 0.0;
-	public static final double DRIVE_V_VALUE = 0.067;
-	public static final double DRIVE_A_VALUE = 0.034;
+	public static final double DRIVE_V_VALUE = 0.0749;//0.067
+	public static final double DRIVE_A_VALUE = 0.011;//0.034;
 }
