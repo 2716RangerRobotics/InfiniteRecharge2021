@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -37,6 +39,8 @@ public class Drive extends SubsystemBase {
   public static final double kProportion = 0.018;
   DigitalInput colorWheelLimit;
   private PIDController spinController;
+  private DifferentialDriveOdometry odometry;
+  private Pose2d currentPos; 
 
   /**
    * Creates a new Drive.
@@ -79,6 +83,7 @@ public class Drive extends SubsystemBase {
     
     // leftMotorMaster.setOpenLoopRampRate(rate);
     colorWheelLimit = new DigitalInput(Constants.EXTEND_LIMIT);
+    odometry = new DifferentialDriveOdometry(imu.getRotation2d());
   }
 
   @Override
@@ -88,6 +93,7 @@ public class Drive extends SubsystemBase {
       SmartDashboard.putNumber("Gyro", (int)imu.getYaw());
       SmartDashboard.putNumber("DriveEnc", getLeftPosition());
       SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
+      currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
 
     // }
   }
@@ -105,6 +111,9 @@ public class Drive extends SubsystemBase {
       rightMotorMaster.setIdleMode(IdleMode.kCoast);
       rightMotorFollower.setIdleMode(IdleMode.kCoast);
     }
+  }
+  public Pose2d getCurrentPos(){
+    return currentPos;
   }
   public boolean isColorWheelLimit() {
     if(!colorWheelLimit.get()){
