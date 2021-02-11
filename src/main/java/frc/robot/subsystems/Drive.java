@@ -121,6 +121,10 @@ public class Drive extends SubsystemBase {
     odometry.resetPosition(pos0, imu.getRotation2d());
   }
 
+  /**
+   * currently not on robot
+   * @return the state of the limit switch that touches the color wheel
+   */
   public boolean isColorWheelLimit() {
     if(!colorWheelLimit.get()){
       return true;
