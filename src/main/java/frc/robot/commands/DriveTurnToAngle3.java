@@ -20,8 +20,10 @@ public class DriveTurnToAngle3 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.drive.zeroAngle();
     RobotContainer.drive.resetSpinPID();
     this.adjustedAngle =  this.targetAngle + RobotContainer.drive.getAngle();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.

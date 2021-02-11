@@ -35,7 +35,7 @@ public class Drive extends SubsystemBase {
   CANEncoder rightEncoder;
   CANEncoder leftEncoder;
   private AHRS imu;
-  public static final double FeedForward = 0.04;//18;
+  public static final double FeedForward = 0.03;//18;
   public static final double kProportion = 0.018;
   DigitalInput colorWheelLimit;
   private PIDController spinController;
@@ -139,7 +139,7 @@ public class Drive extends SubsystemBase {
     if(spinOutput < 0){
       this.arcadeDrive(moveSpeed,spinOutput - FeedForward, false);
     }else{
-      this.arcadeDrive(moveSpeed, spinOutput + FeedForward, false);
+      this.arcadeDrive(moveSpeed, spinOutput +.02+ FeedForward, false);
     }
   }
 

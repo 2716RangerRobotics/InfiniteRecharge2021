@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,6 +23,9 @@ public class DrivePathWeaver extends CommandBase {
   Trajectory trajectory = new Trajectory();
   Timer timer = new Timer();
   RamseteController ramsete = new RamseteController();
+  private final DifferentialDriveKinematics kinematics =
+      new DifferentialDriveKinematics(13.597);
+
   public DrivePathWeaver(String fileName) {
     // Use addRequirements() here to declare subsystem dependencies.
     String trajectoryJSON = "paths/"+ fileName + ".wpilib.json";
@@ -46,7 +50,8 @@ public class DrivePathWeaver extends CommandBase {
   public void execute() {
     Trajectory.State reference = trajectory.sample(timer.get());
     ChassisSpeeds speeds = ramsete.calculate(RobotContainer.drive.getCurrentPos(), reference);
-    RobotContainer.drive.arcadeDrive(moveValue, rotateValue, squaredInputs);
+    // kinematics.toWheelSpeeds(speeds);
+    // RobotContainer.drive.arcadeDrive(moveValue, rotateValue, squaredInputs);
   }
 
   // Called once the command ends or is interrupted.
@@ -58,4 +63,17 @@ public class DrivePathWeaver extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
+    /** Sets speeds to the drivetrain motors. */
+    // public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
+    //   var leftFeedforward = m_feedforward.calculate(speeds.leftMetersPerSecond);
+    //   var rightFeedforward = m_feedforward.calculate(speeds.rightMetersPerSecond);
+    //   double leftOutput =
+    //       m_leftPIDController.calculate(m_leftEncoder.getRate(), speeds.leftMetersPerSecond);
+    //   double rightOutput =
+    //       m_rightPIDController.calculate(m_rightEncoder.getRate(), speeds.rightMetersPerSecond);
+  
+    //   m_leftGroup.setVoltage(leftOutput + leftFeedforward);
+    //   m_rightGroup.setVoltage(rightOutput + rightFeedforward);
+    // }
 }

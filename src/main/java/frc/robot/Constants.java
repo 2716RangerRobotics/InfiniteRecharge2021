@@ -63,8 +63,8 @@ public final class Constants {
     public static final double DRIVE_SPIN_P = 0.008;
     public static final double DRIVE_SPIN_I = 0.0;
     public static final double DRIVE_SPIN_D = 0.3;
-    public static final double MAX_SPEED = 0.0;
-    public static final double MAX_ACCELERATION = 0.0;
+    public static final double MAX_SPEED = 6.0;
+    public static final double MAX_ACCELERATION = 1.0;
 
 
     // //limit switch
