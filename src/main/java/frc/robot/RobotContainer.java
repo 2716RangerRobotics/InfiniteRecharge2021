@@ -29,6 +29,8 @@ import frc.robot.commands.CoDriverIntakeRumble;
 import frc.robot.commands.DriveResetGyro;
 import frc.robot.commands.DriveStop;
 import frc.robot.commands.DriveStraightToDistance;
+import frc.robot.commands.DriveStraightToDistance2;
+import frc.robot.commands.DriveStraightToDistance3;
 import frc.robot.commands.DriveToWheelPosition;
 import frc.robot.commands.DriveTurnToAngle;
 import frc.robot.commands.DriveTurnToAngle3;
@@ -151,6 +153,8 @@ public class RobotContainer {
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
     driverDRight.whenPressed(new DriveTurnToAngle3(90));
+    driverDUp.whenPressed(new DriveStraightToDistance3(60));
+    driverDDown.whenPressed(new DriveStraightToDistance3(-60));
   
     coDriverA1.whenPressed(new BallHandleIntake());
     coDriverA1.whenReleased(new BallHandleUpperStop());

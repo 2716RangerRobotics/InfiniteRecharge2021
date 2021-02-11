@@ -30,6 +30,7 @@ import frc.robot.commands.AutoDriveToRendezvousAndScore;
 import frc.robot.commands.AutoFeedShooter;
 import frc.robot.commands.AutoFeederStationPosition;
 import frc.robot.commands.AutoLetThemEatBalls;
+import frc.robot.commands.AutoSlalomSimple;
 import frc.robot.commands.AutoSneakAttack;
 import frc.robot.commands.AutoSpitAndTurn;
 import frc.robot.commands.AutoTwoBallTake;
@@ -99,6 +100,7 @@ public class Robot extends TimedRobot {
     chooser.addOption("AutoDriveToRendezvousAndScore", new AutoDriveToRendezvousAndScore());
     chooser.addOption("AutoSpitAndTurn", new AutoSpitAndTurn());
     chooser.addOption("AutoAttackAtAngle", new AutoAttackAtAngle());
+    chooser.addOption("AutoSlalomSimple", new AutoSlalomSimple());
 		chooser.addOption("None", null);
 
 		SmartDashboard.putData("Auto Mode", chooser);
