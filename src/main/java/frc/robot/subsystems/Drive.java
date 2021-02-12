@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,7 +42,12 @@ public class Drive extends SubsystemBase {
   private PIDController spinController;
   private DifferentialDriveOdometry odometry;
   private Pose2d currentPos; 
-
+  public static SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.DRIVE_V_VALUE);
+  public static PIDController leftPIDController = 
+    new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
+  public static PIDController rightPIDController =
+    new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
+  
   /**
    * Creates a new Drive.
    */
