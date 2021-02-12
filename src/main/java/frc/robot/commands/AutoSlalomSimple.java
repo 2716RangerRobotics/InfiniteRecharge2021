@@ -15,27 +15,27 @@ public class AutoSlalomSimple extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(-90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(90),
-      new DriveStraightToDistance2(180, .35),
+      new DriveStraightToDistance2(180, .35), //4.572 m
       new DriveTurnToAngle3(90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(-90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(-90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(-90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(-90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(90),
-      new DriveStraightToDistance2(180, .35),
+      new DriveStraightToDistance2(180, .35), //4.572 m
       new DriveTurnToAngle3(90),
-      new DriveStraightToDistance2(60, .35),
+      new DriveStraightToDistance2(60, .35), //1.524 m
       new DriveTurnToAngle3(-90),
-      new DriveStraightToDistance2(60, .35)
+      new DriveStraightToDistance2(60, .35) //1.524 m
       );
 
   }

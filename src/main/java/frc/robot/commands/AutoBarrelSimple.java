@@ -15,31 +15,31 @@ public class AutoBarrelSimple extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new DriveStraightToDistance(150, .5),
+      new DriveStraightToDistance(150, .5), //3.81 m 
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(150, .5),
+      new DriveStraightToDistance(150, .5), //3.81 m
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(120, .5),
+      new DriveStraightToDistance(120, .5), //3.048 m 
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(60, .5), //1.524 m
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(240, .5)
+      new DriveStraightToDistance(240, .5) //6.096 m
     );
   }
 }

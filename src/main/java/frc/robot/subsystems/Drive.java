@@ -70,8 +70,8 @@ public class Drive extends SubsystemBase {
     rightEncoder = rightMotorMaster.getEncoder();
     leftEncoder = leftMotorMaster.getEncoder();                                                                                             
 
-    rightEncoder.setPositionConversionFactor(1.6866);
-    leftEncoder.setPositionConversionFactor(1.6866);
+    rightEncoder.setPositionConversionFactor(1.6866); //.04284 - meter conversion value
+    leftEncoder.setPositionConversionFactor(1.6866); //.04284
 
     leftMotorMaster.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
     leftMotorFollower.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
