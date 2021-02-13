@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,7 +42,12 @@ public class Drive extends SubsystemBase {
   private PIDController spinController;
   private DifferentialDriveOdometry odometry;
   private Pose2d currentPos; 
-
+  public SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.DRIVE_V_VALUE,Constants.kA);
+  public PIDController leftPIDController = 
+    new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
+  public PIDController rightPIDController =
+    new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
+  
   /**
    * Creates a new Drive.
    */
@@ -64,8 +70,8 @@ public class Drive extends SubsystemBase {
     rightEncoder = rightMotorMaster.getEncoder();
     leftEncoder = leftMotorMaster.getEncoder();                                                                                             
 
-    rightEncoder.setPositionConversionFactor(1.6866);
-    leftEncoder.setPositionConversionFactor(1.6866);
+    rightEncoder.setPositionConversionFactor(.04284); //1.6866 - meter conversion value
+    leftEncoder.setPositionConversionFactor(.04284); //1.6866
 
     leftMotorMaster.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
     leftMotorFollower.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
@@ -93,9 +99,10 @@ public class Drive extends SubsystemBase {
       SmartDashboard.putNumber("Gyro", (int)imu.getYaw());
       SmartDashboard.putNumber("DriveEnc", getLeftPosition());
       SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
-      currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
+    
 
     // }
+    currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
   }
   
   public void setBrakeMode(boolean brakeMode){
@@ -121,6 +128,10 @@ public class Drive extends SubsystemBase {
     odometry.resetPosition(pos0, imu.getRotation2d());
   }
 
+  /**
+   * currently not on robot
+   * @return the state of the limit switch that touches the color wheel
+   */
   public boolean isColorWheelLimit() {
     if(!colorWheelLimit.get()){
       return true;

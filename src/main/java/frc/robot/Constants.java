@@ -67,8 +67,14 @@ public final class Constants {
     public static final double DRIVE_SPIN_P = 0.008;
     public static final double DRIVE_SPIN_I = 0.0;
     public static final double DRIVE_SPIN_D = 0.3;
-    public static final double MAX_SPEED = 6.0;
+    public static final double DRIVE_FORWARD_P = 0.008;
+    public static final double DRIVE_FORWARD_I = 0.0;
+    public static final double DRIVE_FORWARD_D = 0.3;
+    public static final double MAX_SPEED = 3.0;
     public static final double MAX_ACCELERATION = 1.0;
+    public static final double kS = .225;
+    public static final double kV = .0749;
+    public static final double kA = 0.0;
 
 
     // //limit switch
@@ -82,6 +88,8 @@ public final class Constants {
     public static final int BOTTOM_BASE_LIMIT = 7;
     public static final int TOP_BASE_LIMIT = 8;
     public static final int EXTEND_LIMIT = 9;
+    // AnalogChannels
+    public static final int DISTANCE_SENSOR_CHANNEL = 0;
 
     //hanging
     public static final double HANGING_RETRACT_POSITION = 0.0;

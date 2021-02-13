@@ -15,31 +15,31 @@ public class AutoBarrelSimple extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new DriveStraightToDistance(150, .5),
+      new DriveStraightToDistance(3.81, .5), //3.81 m 150 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(150, .5),
+      new DriveStraightToDistance(3.81, .5), //3.81 m 150 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(120, .5),
+      new DriveStraightToDistance(3.048, .5), //3.048 m 120 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(240, .5)
+      new DriveStraightToDistance(6.096, .5) //6.096 m 240 in
     );
   }
 }

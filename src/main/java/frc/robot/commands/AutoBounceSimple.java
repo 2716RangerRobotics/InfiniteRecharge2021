@@ -15,22 +15,22 @@ public class AutoBounceSimple extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(60, .5),
+      new DriveStraightToDistance(1.524, .5), //1.524 m 60 in
       new DriveTurnToAngle(-30, .6),
-      new DriveStraightToDistance(-134, -.5),
+      new DriveStraightToDistance(-3.404, -.5), //-3.404 m 134 in
       new DriveTurnToAngle(120, .6),
-      new DriveStraightToDistance(30, .5),
+      new DriveStraightToDistance(.762, .5), //.762 m 30 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(120, .5),
-      new DriveStraightToDistance(-120, -.5),
+      new DriveStraightToDistance(3.048, .5), //3.048 m 120 in
+      new DriveStraightToDistance(-3.048, -.5), //-3.048 m 120 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(90, .5),
+      new DriveStraightToDistance(2.286, .5), //2.286 m 90 in
       new DriveTurnToAngle(-90, .6),
-      new DriveStraightToDistance(120, .5),
-      new DriveStraightToDistance(-60, -.5),
+      new DriveStraightToDistance(3.048, .5), //3.048 m 120 in
+      new DriveStraightToDistance(-1.524, -.5), //-1.524 m 60 in
       new DriveTurnToAngle(90, .6),
-      new DriveStraightToDistance(60, .5));
+      new DriveStraightToDistance(1.524, .5)); //1.524 m 60 in
   }
 }
