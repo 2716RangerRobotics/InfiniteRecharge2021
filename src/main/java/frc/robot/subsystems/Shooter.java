@@ -9,6 +9,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,6 +19,7 @@ import frc.robot.Constants;
  */
 public class Shooter extends SubsystemBase {
   TalonSRX shooterWheel;
+  AnalogInput distanceSensor; 
   /** Creates a new Shooter. */
   public Shooter() {
     shooterWheel = new TalonSRX(Constants.SHOOTER_WHEEL);
@@ -34,6 +37,7 @@ public class Shooter extends SubsystemBase {
     shooterWheel.config_kI(0, 0.0);
     shooterWheel.config_kD(0, 0.0);
     shooterWheel.config_kF(0, 0.0);
+    distanceSensor = new AnalogInput(Constants.DISTANCE_SENSOR_CHANNEL);
 
     // shooterWheel.configPeakOutputForward(1.0);
     // shooterWheel.configPeakOutputReverse(1.0);
@@ -41,7 +45,12 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("dist2wall", this.getDistance());
     // This method will be called once per scheduler run
+  }
+
+  public double getDistance(){
+   return distanceSensor.getAverageVoltage()/0.38582698;
   }
 
   /**
