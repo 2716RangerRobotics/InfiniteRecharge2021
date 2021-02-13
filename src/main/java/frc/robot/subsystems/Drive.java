@@ -42,10 +42,10 @@ public class Drive extends SubsystemBase {
   private PIDController spinController;
   private DifferentialDriveOdometry odometry;
   private Pose2d currentPos; 
-  public static SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.DRIVE_V_VALUE);
-  public static PIDController leftPIDController = 
+  public SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.DRIVE_V_VALUE,Constants.kA);
+  public PIDController leftPIDController = 
     new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
-  public static PIDController rightPIDController =
+  public PIDController rightPIDController =
     new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
   
   /**
@@ -99,9 +99,10 @@ public class Drive extends SubsystemBase {
       SmartDashboard.putNumber("Gyro", (int)imu.getYaw());
       SmartDashboard.putNumber("DriveEnc", getLeftPosition());
       SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
-      currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
+    
 
     // }
+    currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
   }
   
   public void setBrakeMode(boolean brakeMode){

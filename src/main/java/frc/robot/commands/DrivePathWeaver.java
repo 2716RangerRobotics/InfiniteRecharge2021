@@ -25,7 +25,7 @@ public class DrivePathWeaver extends CommandBase {
   Timer timer = new Timer();
   RamseteController ramsete = new RamseteController();
   private final DifferentialDriveKinematics kinematics =
-      new DifferentialDriveKinematics(13.597);
+      new DifferentialDriveKinematics(13.597);//TODO:Make this in meters
 
   public DrivePathWeaver(String fileName) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -66,19 +66,19 @@ public class DrivePathWeaver extends CommandBase {
     return false;
   }
 
-    /** Sets speeds to the drivetrain motors. */
-    public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
-      var leftFeedforward = RobotContainer.drive.feedforward.calculate(speeds.leftMetersPerSecond);
-      var rightFeedforward = RobotContainer.drive.feedforward.calculate(speeds.rightMetersPerSecond);
-      double leftOutput =
-          RobotContainer.drive.leftPIDController.calculate(
-            RobotContainer.drive.getLeftVelocity(), speeds.leftMetersPerSecond);
-      double rightOutput =
-          RobotContainer.drive.rightPIDController.calculate(
-            RobotContainer.drive.getLeftVelocity(), speeds.rightMetersPerSecond);
+  /** Sets speeds to the drivetrain motors. */
+  public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
+    var leftFeedforward = RobotContainer.drive.feedforward.calculate(speeds.leftMetersPerSecond);
+    var rightFeedforward = RobotContainer.drive.feedforward.calculate(speeds.rightMetersPerSecond);
+    double leftOutput =
+        RobotContainer.drive.leftPIDController.calculate(
+          RobotContainer.drive.getLeftVelocity(), speeds.leftMetersPerSecond);
+    double rightOutput =
+        RobotContainer.drive.rightPIDController.calculate(
+          RobotContainer.drive.getRightVelocity(), speeds.rightMetersPerSecond);
   
-      RobotContainer.drive.setLeftRightMotorOutputs(leftOutput + leftFeedforward,
-        rightOutput + rightFeedforward);
+    RobotContainer.drive.setLeftRightMotorOutputs(leftOutput + leftFeedforward,
+      rightOutput + rightFeedforward);
       
-    }
+  }
 }
