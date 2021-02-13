@@ -22,11 +22,11 @@ public class AutoDriveToRendezvousAndScore extends SequentialCommandGroup {
       super(
         new DriveBrakeOn(),
         new ParallelCommandGroup(
-          new DriveStraightToDistance(100, .25),
+          new DriveStraightToDistance(2.54, .25),
           new BallTiltOut()
         ),
         new ParallelRaceGroup(
-          new DriveStraightToDistance(25, .25),
+          new DriveStraightToDistance(.635, .25),
           new BallIntakeIntake(),
           new BallHandleIntake()
         ),
@@ -34,20 +34,20 @@ public class AutoDriveToRendezvousAndScore extends SequentialCommandGroup {
         // new BallTiltIn(),
         new DriveTurnToAngle(85, .35),
         new ParallelRaceGroup(
-          new DriveStraightToDistance(45, .25),
+          new DriveStraightToDistance(1.143, .25),
           new BallIntakeIntake(),
           new BallHandleIntake()
         ),
         new BallHandleUpperStop(),
-        new DriveStraightToDistance(50, -.25),
+        new DriveStraightToDistance(1.27, -.25),
         new DriveTurnToAngle(95, .35),
-        new DriveStraightToDistance(50, .25),
+        new DriveStraightToDistance(1.27, .25),
         new DriveTurnToAngle(90, .35),
-        new DriveStraightToDistance(100, .25),
+        new DriveStraightToDistance(2.54, .25),
         new DriveTurnToAngle(-90, .35),
 
         new ParallelCommandGroup(
-          new DriveStraightToDistance(75, .25),
+          new DriveStraightToDistance(1.905, .25),
           new BallTiltToScore()
         ),
         // new ParallelRaceGroup(

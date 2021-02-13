@@ -35,13 +35,13 @@ public class AutoSpitAndTurn extends SequentialCommandGroup {
       ),
       new BallIntakeHandleStop(),
       new ParallelCommandGroup(
-        new DriveStraightToDistance(-12, -.35),
+        new DriveStraightToDistance(-.3048, -.35),
         new BallTiltIn()
       ),
       new DriveTurnToAngle(-90, .35),
       new DriveResetEncoders(),
       new WaitCommand(.05),
-      new DriveStraightToDistance(50, .25)
+      new DriveStraightToDistance(1.27, .25)
     );
     // System.out.println("something");
   }

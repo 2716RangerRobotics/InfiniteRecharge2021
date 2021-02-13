@@ -26,17 +26,17 @@ public class AutoAttackAtAngle extends SequentialCommandGroup {
       new DriveBrakeOn(),
       new DriveResetGyro(),
       new ParallelCommandGroup(
-        new DriveStraightToDistance(50, .35),
+        new DriveStraightToDistance(1.27, .35),
         new BallTiltOut()
       ),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(120, .35),
+        new DriveStraightToDistance(3.048, .35),
         new BallIntakeIntake(),
         new BallHandleIntake()
       ),
       new DriveResetEncoders(),
       new ParallelCommandGroup(
-      new DriveStraightToDistance(-50, -.35),
+      new DriveStraightToDistance(-1.27, -.35),
       new BallTiltIn()
       )
     );

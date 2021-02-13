@@ -26,16 +26,16 @@ public class AutoLetThemEatBalls extends SequentialCommandGroup {
       new DriveBrakeOn(),
       new DriveResetGyro(),
       new BallTiltOut(),
-      new DriveStraightToDistance(24, .35, 0.0),
+      new DriveStraightToDistance(.6096, .35, 0.0),
       new DriveResetEncoders(),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(100, .50, 0.0),
+        new DriveStraightToDistance(2.54, .50, 0.0),
         new BallIntakeHandleOuttake()
       ),
       new DriveResetEncoders(),
-      new DriveStraightToDistance(20, .45, 0.0),
+      new DriveStraightToDistance(.508, .45, 0.0),
       new WaitCommand(.05),
-      new DriveStraightToDistance(-144, .45)
+      new DriveStraightToDistance(-3.6576, .45)
       );
   }
 }

@@ -27,20 +27,20 @@ public class AutoFakeTwoBallTake extends SequentialCommandGroup {
       new DriveBrakeOn(),
       new DriveResetGyro(),
       new DriveResetEncoders(),
-      new DriveStraightToDistance(-67, -.25),
+      new DriveStraightToDistance(-1.7018, -.25),
       new DriveTurnToAngle(-90, .35),
-      new DriveStraightToDistance(165, .3),
+      new DriveStraightToDistance(4.191, .3),
       new DriveResetGyro(),
       new DriveTurnToAngle(-90, .35),
       new DriveResetEncoders(),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(45, .35),
+        new DriveStraightToDistance(1.143, .35),
         new BallTiltToScore()
       ),
       new DriveResetEncoders(),
       new WaitCommand(.05),
       new ParallelCommandGroup(
-        new DriveStraightToDistance(7, 25),
+        new DriveStraightToDistance(.1778, 25),
         new BallTiltToScore(),
         new BallIntakeHandleOuttake() //need help, doesnt run outtake
         )

@@ -21,13 +21,13 @@ public class AutoDriveToRendezvousAndPickUpBalls extends SequentialCommandGroup 
     // Use addRequirements() here to declare subsystem dependencies.
     super(
     new DriveBrakeOn(),
-    new DriveStraightToDistance(125, .25),
+    new DriveStraightToDistance(3.175, .25),
     new BallTiltOut(),
     new BallIntakeIntake(),
     // new BallTiltIn(),
     new DriveTurnToAngle(90, .35),
     new ParallelRaceGroup(
-      new DriveStraightToDistance(60, .25)
+      new DriveStraightToDistance(1.524, .25)
     ));
   }
 }

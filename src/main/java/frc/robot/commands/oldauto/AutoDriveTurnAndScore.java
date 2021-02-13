@@ -26,14 +26,14 @@ public class AutoDriveTurnAndScore extends SequentialCommandGroup {
     super(
       new DriveBrakeOn(),
       new DriveResetGyro(),
-      new DriveStraightToDistance(52, .25, 0.0),
+      new DriveStraightToDistance(1.3208, .25, 0.0),
       new DriveTurnToAngle(90, .35),
-      new DriveStraightToDistance(85, .25, 90),
+      new DriveStraightToDistance(2.159, .25, 90),
       new DriveTurnToAngle(-90, .35),
       new DriveResetEncoders(),
       new WaitCommand(.05),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(60, .25, 0.0),
+        new DriveStraightToDistance(1.524, .25, 0.0),
         new BallTiltToScore(),
         new WaitCommand(1.5)
       ),
@@ -43,7 +43,7 @@ public class AutoDriveTurnAndScore extends SequentialCommandGroup {
         //new WaitCommand(5.0)
        // ),
       new ParallelCommandGroup(
-        new DriveStraightToDistance(8, .25),
+        new DriveStraightToDistance(.2032, .25),
         new BallIntakeHandleOuttake(),
         new BallTiltToScore()
       ).withTimeout(5)

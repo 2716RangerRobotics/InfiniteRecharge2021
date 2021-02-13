@@ -24,11 +24,11 @@ public class AutoFeederStationPosition extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
       new DriveBrakeOn(),
-      new DriveStraightToDistance(15, .25),
+      new DriveStraightToDistance(.381, .25),
       new DriveTurnToAngle(-90.0, .25),
-      new DriveStraightToDistance(30, .25),
+      new DriveStraightToDistance(.762, .25),
       new DriveTurnToAngle(90.0, .25),
-      new DriveStraightToDistance(5, .25),
+      new DriveStraightToDistance(.127, .25),
       new ParallelRaceGroup(
         new BallTiltToScore().withTimeout(2.0),
         new BallIntakeIntake(),

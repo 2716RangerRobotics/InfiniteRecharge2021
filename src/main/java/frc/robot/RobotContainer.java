@@ -153,8 +153,8 @@ public class RobotContainer {
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
     driverDRight.whenPressed(new DriveTurnToAngle3(90));
-    driverDUp.whenPressed(new DriveStraightToDistance3(60));
-    driverDDown.whenPressed(new DriveStraightToDistance3(-60));
+    driverDUp.whenPressed(new DriveStraightToDistance3(1.5));
+    driverDDown.whenPressed(new DriveStraightToDistance3(-1.5));
   
     coDriverA1.whenPressed(new BallHandleIntake());
     coDriverA1.whenReleased(new BallHandleUpperStop());

@@ -23,7 +23,7 @@ public class AutoDriveBackwards extends SequentialCommandGroup {
     super(
       new DriveBrakeOn(),
       new DriveResetGyro(),
-      new DriveStraightToDistance(-55, -.25)
+      new DriveStraightToDistance(-1.397, -.25)
     );
   }
 }

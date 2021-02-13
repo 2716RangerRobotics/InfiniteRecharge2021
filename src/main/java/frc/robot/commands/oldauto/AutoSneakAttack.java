@@ -28,19 +28,19 @@ public class AutoSneakAttack extends SequentialCommandGroup {
       new DriveResetGyro(),
       new ParallelCommandGroup(
         new BallTiltOut(),
-        new DriveStraightToDistance(60, .45, 0.0)
+        new DriveStraightToDistance(1.524, .45, 0.0)
       ),
       new DriveResetGyro(),      
       new ParallelRaceGroup(
         new BallIntakeIntake(),
         new BallHandleIntake(),
-        new DriveStraightToDistance(102, .35, 0.0)
+        new DriveStraightToDistance(2.5908, .35, 0.0)
       ),
       new DriveResetGyro(),
       new DriveResetEncoders(),
       new WaitCommand(.05),
       new ParallelCommandGroup(
-        new DriveStraightToDistance(88, .25, 0.0),
+        new DriveStraightToDistance(2.2352, .25, 0.0),
         new BallTiltIn()
 
       )

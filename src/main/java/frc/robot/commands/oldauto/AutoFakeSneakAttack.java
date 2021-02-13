@@ -27,19 +27,19 @@ public class AutoFakeSneakAttack extends SequentialCommandGroup {
       new DriveBrakeOn(),
       new DriveResetGyro(),
       new DriveTurnToAngle(90, .35),
-      new DriveStraightToDistance(85, .3),
+      new DriveStraightToDistance(2.159, .3),
       new DriveResetGyro(),
       new DriveTurnToAngle(90, .35),
       new DriveResetEncoders(),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(115, .3),
+        new DriveStraightToDistance(2.921, .3),
         new BallTiltToScore()
         ),
 
         new WaitCommand(.05),
         new DriveResetEncoders(),
         new ParallelCommandGroup(
-          new DriveStraightToDistance(15, .3),
+          new DriveStraightToDistance(.381, .3),
           new BallTiltToScore(),
           new BallIntakeHandleOuttake()
         )

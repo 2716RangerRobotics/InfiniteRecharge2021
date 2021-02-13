@@ -22,7 +22,7 @@ public class AutoDriveStraight extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
       new DriveBrakeOn(),
-      new DriveStraightToDistance(55, .15, 0.0)
+      new DriveStraightToDistance(1.397, .15, 0.0)
     );
     // System.out.println("something");
   }

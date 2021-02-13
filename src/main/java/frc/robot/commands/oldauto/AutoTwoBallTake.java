@@ -25,10 +25,10 @@ public class AutoTwoBallTake extends SequentialCommandGroup {
       new DriveResetGyro(),
       new ParallelCommandGroup(
         new BallTiltOut(),
-        new DriveStraightToDistance(40, .45, 0.0)
+        new DriveStraightToDistance(1.016, .45, 0.0)
       ),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(77, .25, 0.0),
+        new DriveStraightToDistance(1.9558, .25, 0.0),
         new BallIntakeIntake(),
         new BallHandleIntake()
         // new WaitCommand(2.0)
@@ -36,7 +36,7 @@ public class AutoTwoBallTake extends SequentialCommandGroup {
       new BallIntakeHandleStop(),
       new ParallelRaceGroup(
         //new DriveTurnToAngle(-10, .35),
-        new DriveStraightToDistance(15, .35),
+        new DriveStraightToDistance(.381, .35),
         new BallIntakeIntake(),
         new BallHandleIntake()
       ),
@@ -50,7 +50,7 @@ public class AutoTwoBallTake extends SequentialCommandGroup {
       new DriveTurnToAngle(45, .35),
       new DriveResetEncoders(),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(21, .2),
+        new DriveStraightToDistance(.5334, .2),
         new BallIntakeIntake(),
         new BallHandleIntake()
       ),
@@ -59,7 +59,7 @@ public class AutoTwoBallTake extends SequentialCommandGroup {
       new WaitCommand(.25),
       //new DriveTurnToAngle(-45, .35),
       new ParallelRaceGroup(
-        new DriveStraightToDistance(-72, -.35),
+        new DriveStraightToDistance(-1.8288, -.35),
         new BallIntakeIntake(),
         new BallHandleIntake()
       )

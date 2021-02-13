@@ -28,7 +28,7 @@ public class AutoFeedShooter extends SequentialCommandGroup {
       new BallIntakeHandleOuttake().withTimeout(5),
       new BallTiltIn(),
       new DriveTurnToAngle(45, .25),
-      new DriveStraightToDistance(25, -.25)
+      new DriveStraightToDistance(.635, -.25)
     );
   }
 }

@@ -5,20 +5,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
 public class ShooterSetSpeed extends CommandBase {
-  /** Creates a new ShooterSetSpeed. */
-  public ShooterSetSpeed() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  double speed;/** Creates a new ShooterSetSpeed. */
+  public ShooterSetSpeed(double speed) {
+    addRequirements(RobotContainer.shooter);
+    this.speed = speed;// Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.shooter.setSpeed(this.speed);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    System.out.println("Shooter Speed " + RobotContainer.shooter.getSpeed());
+  }
 
   // Called once the command ends or is interrupted.
   @Override
