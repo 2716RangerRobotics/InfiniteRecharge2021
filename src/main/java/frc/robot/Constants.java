@@ -59,6 +59,10 @@ public final class Constants {
     public static final double DRIVE_SLOW_SPEED = 0.5;
     public static final double TURN_SLOW_SPEED = 0.7;
 
+    public static final double LEFT_MOTOR_MASTER_TEST = 0.3;
+    public static final double RIGHT_MOTOR_MASTER_TEST = 0.3;
+
+
     //Drive PID Values
     public static final double DRIVE_SPIN_P = 0.008;
     public static final double DRIVE_SPIN_I = 0.0;
