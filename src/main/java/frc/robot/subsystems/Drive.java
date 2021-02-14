@@ -79,6 +79,9 @@ public class Drive extends SubsystemBase {
     rightEncoder.setPositionConversionFactor(.04284); //1.6866 - meter conversion value
     leftEncoder.setPositionConversionFactor(.04284); //1.6866
 
+    rightEncoder.setVelocityConversionFactor(.04284 / 60);
+    leftEncoder.setVelocityConversionFactor(.04284 / 60);
+
     leftMotorMaster.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
     leftMotorFollower.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
 
@@ -109,7 +112,7 @@ public class Drive extends SubsystemBase {
     
 
     // }
-    System.out.println("Output Current: " + leftMotorFollower.getOutputCurrent());
+    
     currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
   }
   
@@ -154,7 +157,7 @@ public class Drive extends SubsystemBase {
     if(spinOutput < 0){
       this.arcadeDrive(moveSpeed,spinOutput - FeedForward, false);
     }else{
-      this.arcadeDrive(moveSpeed, spinOutput +.02+ FeedForward, false);
+      this.arcadeDrive(moveSpeed, spinOutput + FeedForward, false);
     }
   }
 
