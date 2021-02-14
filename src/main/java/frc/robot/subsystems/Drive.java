@@ -58,6 +58,12 @@ public class Drive extends SubsystemBase {
     rightMotorMaster = new CANSparkMax(Constants.RIGHT_MOTOR_MASTER, MotorType.kBrushless);
     rightMotorFollower = new CANSparkMax(Constants.RIGHT_MOTOR_FOLLOWER, MotorType.kBrushless);
 
+    leftMotorMaster.restoreFactoryDefaults();
+    leftMotorFollower.restoreFactoryDefaults();
+
+    rightMotorMaster.restoreFactoryDefaults();
+    rightMotorFollower.restoreFactoryDefaults();
+
     rightMotorMaster.setInverted(true);
     rightMotorFollower.setInverted(true);
 
@@ -97,11 +103,13 @@ public class Drive extends SubsystemBase {
     // This method will be called once per scheduler run
     // if(DriverStation.getInstance().isAutonomous()||DriverStation.getInstance().isTest()){
       SmartDashboard.putNumber("Gyro", (int)imu.getYaw());
-      SmartDashboard.putNumber("DriveEnc", getLeftPosition());
+      SmartDashboard.putNumber("DriveLeftEnc", getLeftPosition());
+      SmartDashboard.putNumber("DriveRightEnc", getRightPosition());
       SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
     
 
     // }
+    System.out.println("Output Current: " + leftMotorFollower.getOutputCurrent());
     currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
   }
   

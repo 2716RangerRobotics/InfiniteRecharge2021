@@ -26,6 +26,7 @@ import frc.robot.commands.BallTiltStop;
 import frc.robot.commands.BallTiltToScore;
 import frc.robot.commands.BallTiltToPass;
 import frc.robot.commands.CoDriverIntakeRumble;
+import frc.robot.commands.DriveResetEncoders;
 import frc.robot.commands.DriveResetGyro;
 import frc.robot.commands.DriveStop;
 import frc.robot.commands.DriveStraightToDistance;
@@ -38,6 +39,8 @@ import frc.robot.commands.DriveTurnToAngle3;
 import frc.robot.commands.DriveWithGamePad;
 import frc.robot.commands.LimelightLEDOff;
 import frc.robot.commands.LimelightLEDOn;
+import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.ShooterStop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -147,6 +150,8 @@ public class RobotContainer {
     driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whileHeld(new DriveToWheelPosition());
     //driverRTrigger.whenPressed(new AutoDriveStraight(), false);
+    driverSEL7.whenPressed(new ShooterSetSpeed(20));
+    driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new ColorWheelSpinnerLiftDown());
     // driverSEL7.whenReleased(new ColorWheelSpinnerLiftStop());
     // driverSTART8.whenPressed(new ColorWheelSpinnerLiftUp());
@@ -157,10 +162,12 @@ public class RobotContainer {
     // driverDUp.whenPressed(new DriveStraightToDistance3(60));
     // driverDDown.whenPressed(new DriveStraightToDistance3(-60));
     driverDUp.whileHeld(new DriveStraightToDistanceTest(.3));
+    driverDDown.whileHeld(new DriveStraightToDistanceTest(-.3));
   
     coDriverA1.whenPressed(new BallHandleIntake());
     coDriverA1.whenReleased(new BallHandleUpperStop());
     coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
+    coDriverY4.whenPressed(new DriveResetEncoders());
     // coDriverLTrigger.whenPressed(new HangingMechanismResetEnc());
     // coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
     // coDriverB2.whenPressed(new BallIntakeUpperState());

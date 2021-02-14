@@ -29,10 +29,10 @@ public final class Constants {
     public static final int LOWER_MOTOR_1 = 4;
     public static final int LOWER_MOTOR_2 = 9;
     public static final int CLIMBING_LEFT_MOTOR = 2;
-    public static final int CLIMBING_RIGHT_MOTOR = 1;
+    public static final int CLIMBING_RIGHT_MOTOR = 30;
     public static final int WHEEL_MOTOR = 6;
     public static final int LIFT_MOTOR = 5;
-    public static final int SHOOTER_WHEEL = 20;
+    public static final int SHOOTER_WHEEL = 1;
 
     //PWM Channels
     public static final int YOUR_ACTUATOR_CHANNEL = 0;

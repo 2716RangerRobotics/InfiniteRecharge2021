@@ -29,14 +29,14 @@ public class Shooter extends SubsystemBase {
     shooterWheel.enableVoltageCompensation(true);
     
     //this needs to be true if wheels is spinning the wrong way
-    shooterWheel.setInverted(false);
+    shooterWheel.setInverted(true);
     //if wheel spin is bawards from sensor, this must be true
-    shooterWheel.setSensorPhase(false);
+    shooterWheel.setSensorPhase(true);
     shooterWheel.setNeutralMode(NeutralMode.Coast);
-    shooterWheel.config_kP(0, 1.0);
+    shooterWheel.config_kP(0, 0.0);
     shooterWheel.config_kI(0, 0.0);
     shooterWheel.config_kD(0, 0.0);
-    shooterWheel.config_kF(0, 0.0);
+    shooterWheel.config_kF(0, 20.0);
     distanceSensor = new AnalogInput(Constants.DISTANCE_SENSOR_CHANNEL);
 
     // shooterWheel.configPeakOutputForward(1.0);
