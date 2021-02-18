@@ -33,10 +33,17 @@ public class Shooter extends SubsystemBase {
     //if wheel spin is bawards from sensor, this must be true
     shooterWheel.setSensorPhase(true);
     shooterWheel.setNeutralMode(NeutralMode.Coast);
-    shooterWheel.config_kP(0, 0.0);
+    shooterWheel.config_kP(0, 0.2);
     shooterWheel.config_kI(0, 0.0);
     shooterWheel.config_kD(0, 0.0);
-    shooterWheel.config_kF(0, 20.0);
+    shooterWheel.config_kF(0, 0.008);
+    try{
+      shooterWheel.configContinuousCurrentLimit(40);
+      shooterWheel.configPeakCurrentLimit(50);
+      shooterWheel.configPeakCurrentDuration(200);
+    }catch(Exception e){
+      e.printStackTrace();
+    }
     distanceSensor = new AnalogInput(Constants.DISTANCE_SENSOR_CHANNEL);
 
     // shooterWheel.configPeakOutputForward(1.0);
@@ -67,6 +74,11 @@ public class Shooter extends SubsystemBase {
    */
   public void setSpeed(double speed){
     shooterWheel.set(ControlMode.Velocity, speed);
+  }
+
+  public void setOutput(double speed){
+    shooterWheel.set(ControlMode.PercentOutput, speed);
+    
   }
 
   /**

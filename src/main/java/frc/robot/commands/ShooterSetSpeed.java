@@ -23,7 +23,7 @@ public class ShooterSetSpeed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Shooter Speed " + RobotContainer.shooter.getSpeed());
+    // System.out.println("Shooter Speed " + RobotContainer.shooter.getSpeed());
   }
 
   // Called once the command ends or is interrupted.
@@ -33,6 +33,6 @@ public class ShooterSetSpeed extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(RobotContainer.shooter.getSpeed() - this.speed) < 1000;
   }
 }

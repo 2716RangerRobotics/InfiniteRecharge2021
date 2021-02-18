@@ -39,6 +39,7 @@ import frc.robot.commands.DriveTurnToAngle3;
 import frc.robot.commands.DriveWithGamePad;
 import frc.robot.commands.LimelightLEDOff;
 import frc.robot.commands.LimelightLEDOn;
+import frc.robot.commands.ShootBalls;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.ShooterStop;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -150,7 +151,7 @@ public class RobotContainer {
     driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whileHeld(new DriveToWheelPosition());
     //driverRTrigger.whenPressed(new AutoDriveStraight(), false);
-    driverSEL7.whenPressed(new ShooterSetSpeed(20));
+    driverSEL7.whenPressed(new ShooterSetSpeed(70000));
     driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new ColorWheelSpinnerLiftDown());
     // driverSEL7.whenReleased(new ColorWheelSpinnerLiftStop());
@@ -168,7 +169,7 @@ public class RobotContainer {
     coDriverA1.whenReleased(new BallHandleUpperStop());
     coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
     coDriverY4.whenPressed(new DriveResetEncoders());
-    // coDriverLTrigger.whenPressed(new HangingMechanismResetEnc());
+    coDriverLTrigger.whenPressed(new ShootBalls(70000));
     // coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
     // coDriverB2.whenPressed(new BallIntakeUpperState());
     // coDriverX3.whenPressed(new HangingMechanismRetract());
