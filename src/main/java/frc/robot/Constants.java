@@ -80,7 +80,8 @@ public final class Constants {
     // //limit switch
     // public static final int GEAR_SWITCH_PORT = 0;
     // public static final int GEAR_SENSOR_DIO_ID = 1;
-    public static final int BALL_COUNT_SENSOR = 2;
+    public static final int BALL_HANDLE_SENSOR = 1;
+    public static final int BALL_INTAKE_SENSOR = 2;
     public static final int RIGHT_FRONT_LIMIT = 3;
     public static final int LEFT_FRONT_LIMIT = 4;
     public static final int RIGHT_REAR_LIMIT = 5;

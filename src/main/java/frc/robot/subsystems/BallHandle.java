@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
@@ -19,6 +19,7 @@ import frc.robot.Constants;
 public class BallHandle extends SubsystemBase {
     VictorSPX upperMotor1;
     VictorSPX upperMotor2;
+    DigitalInput ballSensor;
 
     
     static final double ROLLER_MOTOR_IN_SPEED = -0.8;
@@ -39,12 +40,17 @@ public class BallHandle extends SubsystemBase {
   public BallHandle() {
     upperMotor1 = new VictorSPX(Constants.UPPER_MOTOR_1);
     upperMotor2 = new VictorSPX(Constants.UPPER_MOTOR_2);
+    ballSensor = new DigitalInput(Constants.BALL_HANDLE_SENSOR);
   
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public boolean getBallSensor(){
+    return ballSensor.get();
   }
 
   public void setUpperMotors(UpperState state) {

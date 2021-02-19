@@ -24,6 +24,7 @@ import frc.robot.commands.BallTiltIn;
 import frc.robot.commands.BallTiltOut;
 import frc.robot.commands.BallTiltStop;
 import frc.robot.commands.BallTiltToScore;
+import frc.robot.commands.CG_BallIntakeForShooting;
 import frc.robot.commands.BallTiltToPass;
 import frc.robot.commands.CoDriverIntakeRumble;
 import frc.robot.commands.DriveResetEncoders;
@@ -170,6 +171,7 @@ public class RobotContainer {
     coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
     coDriverY4.whenPressed(new DriveResetEncoders());
     coDriverLTrigger.whenPressed(new ShootBalls(70000));
+    coDriverLTrigger.whenReleased(new ShooterStop());
     // coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
     // coDriverB2.whenPressed(new BallIntakeUpperState());
     // coDriverX3.whenPressed(new HangingMechanismRetract());
@@ -177,7 +179,8 @@ public class RobotContainer {
     // coDriverY4.whenPressed(new HangingMechanismExtendToDistance(100000, 0.3));
     // coDriverY4.whenReleased(new HangingMechanismStop());
     // coDriverRB6.whenPressed(new HangingMechanismSetServo());
-    // coDriverLB5.whenPressed(new HangingMechanismResetServo());
+    coDriverLB5.whenPressed(new CG_BallIntakeForShooting());
+    coDriverLB5.whenReleased(new BallIntakeHandleStop());
     // coDriverDLeft.whenPressed(new ColorWheelSpinnerRotationWheel());
     //coDriverDLeft.whenReleased(new ColorWheelSpinnerWheelStop()); //do we need this for this command?
     // coDriverDRight.whenPressed(new ColorWheelSpinnerColorRotation());

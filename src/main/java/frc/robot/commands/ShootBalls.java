@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -18,17 +19,55 @@ public class ShootBalls extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new BallTiltIn(),
       new ShooterSetSpeed(speed),
       new CoDriverIntakeRumble(),
       new ParallelRaceGroup(
         new BallHandleIntake(),
-        new SequentialCommandGroup(
-          new WaitCommand(1),
-          new BallIntakeIntake()
-        ),
-        new WaitCommand(5)
+        new ShooterWaitTilBall()
       ),
+      new BallIntakeHandleStop(),
+      new ParallelCommandGroup(
+        new ShooterSetSpeed(speed),
+        new SequentialCommandGroup(
+          new ParallelRaceGroup(
+            new BallHandleIntakeTilBall(),
+            new BallIntakeIntake()
+          ),
+          new BallIntakeHandleStop()
+        )
+      ),
+      new ParallelRaceGroup(
+        new BallHandleIntake(),
+        new ShooterWaitTilBall()
+      ),
+      new BallIntakeHandleStop(),
+      new ParallelCommandGroup(
+        new ShooterSetSpeed(speed),
+        new SequentialCommandGroup(
+          new ParallelRaceGroup(
+            new BallHandleIntakeTilBall(),
+            new BallIntakeIntake()
+          ),
+          new BallIntakeHandleStop()
+        )
+      ),
+      new ParallelRaceGroup(
+        new BallHandleIntake(),
+        new ShooterWaitTilBall()
+      ),
+      new BallIntakeHandleStop(),
+      new ShooterSetSpeed(speed),
       new ShooterStop()
+      // new ParallelRaceGroup(
+      //   new BallHandleIntake(),
+      //   new SequentialCommandGroup(
+      //     new WaitCommand(1),
+      //     new BallIntakeIntake()
+      //   ),
+      //   new WaitCommand(5)
+      // ),
+      // new ShooterStop()
 
     );
   }

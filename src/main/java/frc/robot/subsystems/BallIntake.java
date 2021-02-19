@@ -20,7 +20,7 @@ public class BallIntake extends SubsystemBase {
 
     VictorSPX lowerMotor1;
     VictorSPX lowerMotor2;
-    DigitalInput ballCountSensor;
+    DigitalInput ballSensor;
 
     
     //DoubleSolenoid tiltPnuematic;
@@ -44,7 +44,7 @@ public class BallIntake extends SubsystemBase {
     public BallIntake() {
        lowerMotor1 = new VictorSPX(Constants.LOWER_MOTOR_1);
         lowerMotor2 = new VictorSPX(Constants.LOWER_MOTOR_2);
-        ballCountSensor = new DigitalInput(Constants.BALL_COUNT_SENSOR);
+        ballSensor = new DigitalInput(Constants.BALL_INTAKE_SENSOR);
     }
 
   @Override
@@ -57,6 +57,10 @@ public class BallIntake extends SubsystemBase {
     // SmartDashboard.putBoolean("Ball Count Sensor", !ballCountSensor.get());
     // SmartDashboard.putNumber("Ball Count", ballCount);
     // prevBallSensor = ballCountSensor.get();
+  }
+
+  public boolean getBallSensor(){
+    return ballSensor.get();
   }
 
   public void resetBallCount(){
