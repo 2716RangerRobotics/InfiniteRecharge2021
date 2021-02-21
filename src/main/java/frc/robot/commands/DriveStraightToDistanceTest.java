@@ -29,7 +29,7 @@ public class DriveStraightToDistanceTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.drive.setLeftRightMotorOutputs(speed,speed);
+    RobotContainer.drive.setLeftRightMotorOutputs(speed,-speed);
     // leftMotorMaster.set(Constants.LEFT_MOTOR_MASTER_TEST);
     // rightMotorMaster.set(Constants.RIGHT_MOTOR_MASTER_TEST);
   }

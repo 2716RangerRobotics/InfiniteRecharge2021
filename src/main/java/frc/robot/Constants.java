@@ -67,14 +67,20 @@ public final class Constants {
     public static final double DRIVE_SPIN_P = 0.008;
     public static final double DRIVE_SPIN_I = 0.0;
     public static final double DRIVE_SPIN_D = 0.3;
-    public static final double DRIVE_FORWARD_P = 0.008;
+    public static final double DRIVE_FORWARD_P = 0.242; //0.008;
     public static final double DRIVE_FORWARD_I = 0.0;
-    public static final double DRIVE_FORWARD_D = 0.3;
-    public static final double MAX_SPEED = 3.0;
-    public static final double MAX_ACCELERATION = .75;
-    public static final double kS = .225;
-    public static final double kV = .0749;
-    public static final double kA = 0.0;
+    public static final double DRIVE_FORWARD_D = 0.0; //0.3;
+    public static final double MAX_SPEED = 2.0;
+    public static final double MAX_ACCELERATION = .55;
+    public static final double kS = 0.20; //.225;
+    public static final double kV = 2.75;//2.92; //2.92; //.0749;
+    public static final double kA = .362; //0.362; //0.0;
+    public static final double MOTION_PROFILE_PERIOD = 0.01;
+    
+	public static final double DRIVE_P_VALUE =0.242; //.505;//1.8;
+	public static final double DRIVE_D_VALUE = 0.0; //0.0;
+	public static final double DRIVE_V_VALUE = 2.75;//2.92; //2.92; //0.0749;//0.067
+	public static final double DRIVE_A_VALUE =.362; //0.362;  //0.011;//0.034;
 
 
     // //limit switch
@@ -105,10 +111,4 @@ public final class Constants {
     public static final double COLOR_WHEEL_MAX_POSITION = 50.0;
     public static final double COLOR_WHEEL_MIN_POSITION = 0.0;
 
-    public static final double MOTION_PROFILE_PERIOD = 0.01;
-    
-	public static final double DRIVE_P_VALUE = .505;//1.8;
-	public static final double DRIVE_D_VALUE = 0.0;
-	public static final double DRIVE_V_VALUE = 0.0749;//0.067
-	public static final double DRIVE_A_VALUE = 0.011;//0.034;
 }

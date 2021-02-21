@@ -27,6 +27,7 @@ import frc.robot.commands.BallTiltToScore;
 import frc.robot.commands.CG_BallIntakeForShooting;
 import frc.robot.commands.BallTiltToPass;
 import frc.robot.commands.CoDriverIntakeRumble;
+import frc.robot.commands.DrivePathWeaver;
 import frc.robot.commands.DriveResetEncoders;
 import frc.robot.commands.DriveResetGyro;
 import frc.robot.commands.DriveStop;
@@ -93,24 +94,24 @@ public class RobotContainer {
 	static Button driverRTrigger = new TriggerButton(driverPad, Hand.kRight);
 	// static Button driverStartSelect = new DoubleButton(driverSEL7, driverSTART8);
   
-  private static XboxController coDriverPad = new XboxController(1);
-  static Button coDriverA1 = new JoystickButton(coDriverPad, 1);
-	static Button coDriverB2 = new JoystickButton(coDriverPad, 2);
-	static Button coDriverX3 = new JoystickButton(coDriverPad, 3);
-	static Button coDriverY4 = new JoystickButton(coDriverPad, 4);
-	static Button coDriverLB5 = new JoystickButton(coDriverPad, 5);
-	static Button coDriverRB6 = new JoystickButton(coDriverPad, 6);
-	static Button coDriverSEL7 = new JoystickButton(coDriverPad, 7);
-	static Button coDriverSTART8 = new JoystickButton(coDriverPad, 8);
-	static Button coDriverLS9 = new JoystickButton(coDriverPad, 9);
-	static Button coDriverRS10 = new JoystickButton(coDriverPad, 10);
-	static Button coDriverDLeft = new DPadButton(coDriverPad, DPadButton.Value.kDPadLeft);
-	static Button coDriverDUp = new DPadButton(coDriverPad, DPadButton.Value.kDPadUp);
-	static Button coDriverDDown = new DPadButton(coDriverPad, DPadButton.Value.kDPadDown);
-	static Button coDriverDRight = new DPadButton(coDriverPad, DPadButton.Value.kDPadRight);
-	static Button coDriverLTrigger = new TriggerButton(coDriverPad, Hand.kLeft);
-	static Button coDriverRTrigger = new TriggerButton(coDriverPad, Hand.kRight);
-	static Button coDriverLTriggerRTrigger = new DoubleButton(coDriverLTrigger, coDriverRTrigger);
+  // private static XboxController coDriverPad = new XboxController(1);
+  // static Button coDriverA1 = new JoystickButton(coDriverPad, 1);
+	// static Button coDriverB2 = new JoystickButton(coDriverPad, 2);
+	// static Button coDriverX3 = new JoystickButton(coDriverPad, 3);
+	// static Button coDriverY4 = new JoystickButton(coDriverPad, 4);
+	// static Button coDriverLB5 = new JoystickButton(coDriverPad, 5);
+	// static Button coDriverRB6 = new JoystickButton(coDriverPad, 6);
+	// static Button coDriverSEL7 = new JoystickButton(coDriverPad, 7);
+	// static Button coDriverSTART8 = new JoystickButton(coDriverPad, 8);
+	// static Button coDriverLS9 = new JoystickButton(coDriverPad, 9);
+	// static Button coDriverRS10 = new JoystickButton(coDriverPad, 10);
+	// static Button coDriverDLeft = new DPadButton(coDriverPad, DPadButton.Value.kDPadLeft);
+	// static Button coDriverDUp = new DPadButton(coDriverPad, DPadButton.Value.kDPadUp);
+	// static Button coDriverDDown = new DPadButton(coDriverPad, DPadButton.Value.kDPadDown);
+	// static Button coDriverDRight = new DPadButton(coDriverPad, DPadButton.Value.kDPadRight);
+	// static Button coDriverLTrigger = new TriggerButton(coDriverPad, Hand.kLeft);
+	// static Button coDriverRTrigger = new TriggerButton(coDriverPad, Hand.kRight);
+	// static Button coDriverLTriggerRTrigger = new DoubleButton(coDriverLTrigger, coDriverRTrigger);
 
 
   /**
@@ -163,36 +164,37 @@ public class RobotContainer {
     driverDRight.whenPressed(new DriveTurnToAngle3(90));
     // driverDUp.whenPressed(new DriveStraightToDistance3(60));
     // driverDDown.whenPressed(new DriveStraightToDistance3(-60));
-    driverDUp.whileHeld(new DriveStraightToDistanceTest(.3));
-    driverDDown.whileHeld(new DriveStraightToDistanceTest(-.3));
+    // driverDUp.whenPressed(new DriveStraightToDistance3(3));
+    driverDUp.whenPressed(new DrivePathWeaver("Slalom1"));
+    driverDDown.whileHeld(new DriveStraightToDistanceTest(-.03));
   
-    coDriverA1.whenPressed(new BallHandleIntake());
-    coDriverA1.whenReleased(new BallHandleUpperStop());
-    coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
-    coDriverY4.whenPressed(new DriveResetEncoders());
-    coDriverLTrigger.whenPressed(new ShootBalls(70000));
-    coDriverLTrigger.whenReleased(new ShooterStop());
-    // coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
-    // coDriverB2.whenPressed(new BallIntakeUpperState());
-    // coDriverX3.whenPressed(new HangingMechanismRetract());
-    // coDriverX3.whenReleased(new HangingMechanismStop());
-    // coDriverY4.whenPressed(new HangingMechanismExtendToDistance(100000, 0.3));
-    // coDriverY4.whenReleased(new HangingMechanismStop());
-    // coDriverRB6.whenPressed(new HangingMechanismSetServo());
-    coDriverLB5.whenPressed(new CG_BallIntakeForShooting());
-    coDriverLB5.whenReleased(new BallIntakeHandleStop());
-    // coDriverDLeft.whenPressed(new ColorWheelSpinnerRotationWheel());
-    //coDriverDLeft.whenReleased(new ColorWheelSpinnerWheelStop()); //do we need this for this command?
-    // coDriverDRight.whenPressed(new ColorWheelSpinnerColorRotation());
-    // coDriverDUp.whenPressed(new ColorWheelSpinnerLiftUp());
-    // coDriverDUp.whenReleased(new ColorWheelSpinnerLiftStop());
-    // coDriverDDown.whenPressed(new ColorWheelSpinnerLiftDown());
-    // coDriverDDown.whenReleased(new ColorWheelSpinnerLiftStop());
-    coDriverSEL7.whenPressed(new DriveResetGyro());
-    // coDriverLTrigger.whenPressed(new LimelightLEDOff());
-    // coDriverRTrigger.whenPressed(new LimelightLEDOn());
-    // coDriverSEL7.whenReleased(new ColorWheelSpinnerLiftStop()); //not sure if we need
-    //coDriverLTriggerRTrigger.whenPressed(new HangingMechanismRelease());
+    // coDriverA1.whenPressed(new BallHandleIntake());
+    // coDriverA1.whenReleased(new BallHandleUpperStop());
+    // coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
+    // coDriverY4.whenPressed(new DriveResetEncoders());
+    // coDriverLTrigger.whenPressed(new ShootBalls(70000));
+    // coDriverLTrigger.whenReleased(new ShooterStop());
+    // // coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
+    // // coDriverB2.whenPressed(new BallIntakeUpperState());
+    // // coDriverX3.whenPressed(new HangingMechanismRetract());
+    // // coDriverX3.whenReleased(new HangingMechanismStop());
+    // // coDriverY4.whenPressed(new HangingMechanismExtendToDistance(100000, 0.3));
+    // // coDriverY4.whenReleased(new HangingMechanismStop());
+    // // coDriverRB6.whenPressed(new HangingMechanismSetServo());
+    // coDriverLB5.whenPressed(new CG_BallIntakeForShooting());
+    // coDriverLB5.whenReleased(new BallIntakeHandleStop());
+    // // coDriverDLeft.whenPressed(new ColorWheelSpinnerRotationWheel());
+    // //coDriverDLeft.whenReleased(new ColorWheelSpinnerWheelStop()); //do we need this for this command?
+    // // coDriverDRight.whenPressed(new ColorWheelSpinnerColorRotation());
+    // // coDriverDUp.whenPressed(new ColorWheelSpinnerLiftUp());
+    // // coDriverDUp.whenReleased(new ColorWheelSpinnerLiftStop());
+    // // coDriverDDown.whenPressed(new ColorWheelSpinnerLiftDown());
+    // // coDriverDDown.whenReleased(new ColorWheelSpinnerLiftStop());
+    // coDriverSEL7.whenPressed(new DriveResetGyro());
+    // // coDriverLTrigger.whenPressed(new LimelightLEDOff());
+    // // coDriverRTrigger.whenPressed(new LimelightLEDOn());
+    // // coDriverSEL7.whenReleased(new ColorWheelSpinnerLiftStop()); //not sure if we need
+    // //coDriverLTriggerRTrigger.whenPressed(new HangingMechanismRelease());
   }
 
 
@@ -289,11 +291,11 @@ public class RobotContainer {
   }
 
   public static void setRumbleCoDriver(double rumble) {
-    coDriverPad.setRumble(RumbleType.kLeftRumble, rumble);
-    coDriverPad.setRumble(RumbleType.kRightRumble, rumble);
+    // coDriverPad.setRumble(RumbleType.kLeftRumble, rumble);
+    // coDriverPad.setRumble(RumbleType.kRightRumble, rumble);
   }
   public static void setRumbleTimeCoDriver(double time){
-    coDriverPad.setRumble(RumbleType.kLeftRumble, time);
-    coDriverPad.setRumble(RumbleType.kRightRumble, time);
-}
+    // coDriverPad.setRumble(RumbleType.kLeftRumble, time);
+    // coDriverPad.setRumble(RumbleType.kRightRumble, time);
+  }
 }

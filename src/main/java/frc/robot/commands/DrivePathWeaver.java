@@ -25,11 +25,11 @@ public class DrivePathWeaver extends CommandBase {
   Timer timer = new Timer();
   RamseteController ramsete = new RamseteController();
   private final DifferentialDriveKinematics kinematics =
-      new DifferentialDriveKinematics(13.597);//TODO:Make this in meters
+      new DifferentialDriveKinematics(0.552);
 
   public DrivePathWeaver(String fileName) {
     // Use addRequirements() here to declare subsystem dependencies.
-    String trajectoryJSON = "paths/"+ fileName + ".wpilib.json";
+    String trajectoryJSON = "output/"+ fileName + ".wpilib.json";
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
       trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);

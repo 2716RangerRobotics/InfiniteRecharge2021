@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.util.function.Consumer;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 import static edu.wpi.first.wpilibj.trajectory.TrapezoidProfile.State;
@@ -53,22 +54,24 @@ public class DriveStraightToDistance3 extends CommandBase  {
     double averPos = (RobotContainer.drive.getLeftPosition()+RobotContainer.drive.getRightPosition())/2;
     double averVel = (RobotContainer.drive.getLeftVelocity()+RobotContainer.drive.getRightVelocity())/2;
     TrapezoidProfile.State reference = m_profile.calculate(m_timer.get());
+    double accel = (m_profile.calculate(m_timer.get()+.01).velocity
+                  - m_profile.calculate(m_timer.get()-.01).velocity)/.02;
 
     System.out.println("time:" + m_timer.get() + " gPos: " + reference.position + " rPos: " + averPos
       + " gVel: " + reference.velocity + " rVel: " + averVel); 
 
-    double feedForward = RobotContainer.drive.feedforward.calculate(reference.velocity);
+    double feedForward = RobotContainer.drive.feedforward.calculate(reference.velocity,accel);
     double speedOutput = RobotContainer.drive.leftPIDController.calculate(
             RobotContainer.drive.getLeftVelocity(), reference.velocity);
     double posErr = reference.position - averPos;
     double velErr = reference.velocity - averVel;
     
-    double output = (kP * posErr) + (kD * velErr) + speedOutput + feedForward;
+    double output = ((kP * posErr) + (kD * velErr) + speedOutput + feedForward)/12;
       // + (kV *reference.velocity);
 
     // double output2 = RobotContainer.drive.rightPIDController.calculate(RobotContainer.drive.getLeftVelocity(), speeds.rightMetersPerSecond);
-			
-    RobotContainer.drive.driveWithSpinPID(output, targetAngle);
+		RobotContainer.drive.setLeftRightMotorOutputs(output, output);
+    // RobotContainer.drive.driveWithSpinPID(output, targetAngle);
   }
 
   @Override
