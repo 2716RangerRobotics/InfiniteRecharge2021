@@ -4,7 +4,12 @@
 
 package frc.robot.commands;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -20,7 +25,7 @@ public class DriveGenerateProfile extends CommandBase {
   private volatile double prevPosLeft = 0.0;
   private volatile double prevVelocityRight = 0.0;
   private volatile double prevVelocityLeft = 0.0;
-  private String fileName;
+  private String fileName = "defaultFile";
 
   /** Creates a new DriveGenerateProfile. */
   public DriveGenerateProfile(int totalLength) {
@@ -55,13 +60,23 @@ public class DriveGenerateProfile extends CommandBase {
     }).start();
   }
   protected synchronized void threadedExecute() {
-    if (i < leftMotion.length) {
+    if (i < leftMotion.length && i > 0 ) {
       leftMotion[i][0] = RobotContainer.drive.getLeftPosition();
       leftMotion[i][1] = (leftMotion[i][0] - prevPosLeft) / Constants.MOTION_PROFILE_PERIOD;
-      leftMotion[i][2] = (leftMotion[i][1] - prevVelocityLeft) / Constants.MOTION_PROFILE_PERIOD;
+      leftMotion[i-1][2] = (leftMotion[i][1] - prevVelocityLeft) / Constants.MOTION_PROFILE_PERIOD;
       rightMotion[i][0] = RobotContainer.drive.getRightPosition();
       rightMotion[i][1] = (rightMotion[i][1] - prevPosRight) / Constants.MOTION_PROFILE_PERIOD;
-      rightMotion[i][2] = (rightMotion[i][1] - prevVelocityRight) / Constants.MOTION_PROFILE_PERIOD;
+      rightMotion[i-1][2] = (rightMotion[i][1] - prevVelocityRight) / Constants.MOTION_PROFILE_PERIOD;
+      prevPosLeft = leftMotion[i][0];
+      prevPosRight = rightMotion[i][0];
+      prevVelocityLeft = leftMotion[i][1];
+      prevVelocityRight = rightMotion[i][1];
+      i++;
+    }else if(i < leftMotion.length){
+      leftMotion[i][0] = RobotContainer.drive.getLeftPosition();
+      leftMotion[i][1] = (leftMotion[i][0] - prevPosLeft) / Constants.MOTION_PROFILE_PERIOD;
+      rightMotion[i][0] = RobotContainer.drive.getRightPosition();
+      rightMotion[i][1] = (rightMotion[i][1] - prevPosRight) / Constants.MOTION_PROFILE_PERIOD;
       prevPosLeft = leftMotion[i][0];
       prevPosRight = rightMotion[i][0];
       prevVelocityLeft = leftMotion[i][1];
@@ -84,7 +99,13 @@ public class DriveGenerateProfile extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     isFinished = true;
-    fileName = SmartDashboard.getString("fileName", "deafaultFile");
+    fileName = SmartDashboard.getString("fileName", "defaultFile");
+    try{
+      write(Filesystem.getDeployDirectory()+"paths/" + fileName + "_left.csv", leftMotion);
+      write(Filesystem.getDeployDirectory()+"paths/" + fileName + "_right.csv", rightMotion);
+    }catch(Exception err){
+      err.printStackTrace();
+    }
   }
 
   // Returns true when the command should end.
@@ -93,17 +114,14 @@ public class DriveGenerateProfile extends CommandBase {
     return isFinished;
   }
 
-  // public static void write (String filename, int[]x) throws IOException{
-  //   BufferedWriter outputWriter = null;
-  //   outputWriter = new BufferedWriter(new FileWriter(filename));
-  //   for (int i = 0; i < x.length; i++) {
-  //     // Maybe:
-  //     outputWriter.write(x[i]+"");
-  //     // Or:
-  //     outputWriter.write(Integer.toString(x[i]);
-  //     outputWriter.newLine();
-  //   }
-  //   outputWriter.flush();  
-  //   outputWriter.close();  
-  // }
+  public void write(String filename, double[][]x) throws IOException{
+    BufferedWriter outputWriter = null;
+    outputWriter = new BufferedWriter(new FileWriter(filename));
+    for (int i = 0; i < x.length; i++) {
+      outputWriter.write(Double.toString(x[i][0])+","+Double.toString(x[i][1])+","+Double.toString(x[i][2]));
+      outputWriter.newLine();
+    }
+    outputWriter.flush(); 
+    outputWriter.close();  
+  }
 }

@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -71,15 +70,6 @@ public class DriveMotionProfile extends CommandBase {
    * the method that the thread runs on a loop, it drives a motion profile.
    */
   protected synchronized void threadedExecute() {
-		if (i == 24) {
-			if (RobotContainer.drive.getLeftPosition() == 0) {
-				DriverStation.reportError("yo man left encoder is dead man", false);
-				// new DriveForTime(.5, 1.5).start();
-			} else if (RobotContainer.drive.getRightPosition() == 0) {
-				DriverStation.reportError("aw dang right encoder is chooched", false);
-				// new DriveForTime(.5, 1.5).start();
-			}
-		}
 
 		if (i < leftMotion.length) {
 			double goalPosL = leftMotion[i][0];
