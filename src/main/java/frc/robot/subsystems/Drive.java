@@ -95,7 +95,7 @@ public class Drive extends SubsystemBase {
     rightMotorFollower.setOpenLoopRampRate(Constants.RAMP_RATE);
 
     spinController = new PIDController(Constants.DRIVE_SPIN_P, Constants.DRIVE_SPIN_I, Constants.DRIVE_SPIN_D);
-    
+    spinController.setTolerance(0.01);
     // leftMotorMaster.setOpenLoopRampRate(rate);
     colorWheelLimit = new DigitalInput(Constants.EXTEND_LIMIT);
     odometry = new DifferentialDriveOdometry(imu.getRotation2d());

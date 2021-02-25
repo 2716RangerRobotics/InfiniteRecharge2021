@@ -51,27 +51,31 @@ public class DriveStraightToDistance3 extends CommandBase  {
 
   @Override
   public void execute() {
-    double averPos = (RobotContainer.drive.getLeftPosition()+RobotContainer.drive.getRightPosition())/2;
-    double averVel = (RobotContainer.drive.getLeftVelocity()+RobotContainer.drive.getRightVelocity())/2;
+    double averPos = (RobotContainer.drive.getLeftPosition());
+    double averVel = RobotContainer.drive.getRightVelocity();
     TrapezoidProfile.State reference = m_profile.calculate(m_timer.get());
     double accel = (m_profile.calculate(m_timer.get()+.01).velocity
                   - m_profile.calculate(m_timer.get()-.01).velocity)/.02;
 
-    System.out.println("time:" + m_timer.get() + " gPos: " + reference.position + " rPos: " + averPos
-      + " gVel: " + reference.velocity + " rVel: " + averVel); 
-
     double feedForward = RobotContainer.drive.feedforward.calculate(reference.velocity,accel);
-    double speedOutput = RobotContainer.drive.leftPIDController.calculate(
+    double speedOutputLeft = RobotContainer.drive.leftPIDController.calculate(
             RobotContainer.drive.getLeftVelocity(), reference.velocity);
-    double posErr = reference.position - averPos;
-    double velErr = reference.velocity - averVel;
+    double speedOutputRight = RobotContainer.drive.rightPIDController.calculate(
+            RobotContainer.drive.getRightVelocity(), reference.velocity);
+    double posErrLeft = reference.position - RobotContainer.drive.getLeftPosition();
+    double posErrRight = reference.position - RobotContainer.drive.getRightPosition();
+    double velErrLeft = reference.velocity - RobotContainer.drive.getLeftVelocity();
+    double velErrRight = reference.velocity - RobotContainer.drive.getRightVelocity();
     
-    double output = ((kP * posErr) + (kD * velErr) + speedOutput + feedForward)/12;
+    double outputLeft = ((kP * posErrLeft) + (kD * velErrLeft) + speedOutputLeft + feedForward)/12;
+    double outputRight = ((kP * posErrRight) + (kD * velErrRight) + speedOutputRight + feedForward)/12;
       // + (kV *reference.velocity);
 
     // double output2 = RobotContainer.drive.rightPIDController.calculate(RobotContainer.drive.getLeftVelocity(), speeds.rightMetersPerSecond);
-		RobotContainer.drive.setLeftRightMotorOutputs(output, output);
+		RobotContainer.drive.setLeftRightMotorOutputs(outputLeft, outputRight);
     // RobotContainer.drive.driveWithSpinPID(output, targetAngle);
+    System.out.println("time:" + m_timer.get() + " gPos: " + reference.position + " lPos: " + RobotContainer.drive.getLeftPosition() + 
+            " rPos: " + RobotContainer.drive.getRightPosition());
   }
 
   @Override

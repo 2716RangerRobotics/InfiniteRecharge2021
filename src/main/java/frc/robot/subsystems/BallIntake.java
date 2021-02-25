@@ -57,8 +57,9 @@ public class BallIntake extends SubsystemBase {
     // SmartDashboard.putBoolean("Ball Count Sensor", !ballCountSensor.get());
     // SmartDashboard.putNumber("Ball Count", ballCount);
     // prevBallSensor = ballCountSensor.get();
+    SmartDashboard.putBoolean("IntakeSensor:", ballSensor.get());
   }
-
+  
   public boolean getBallSensor(){
     return ballSensor.get();
   }

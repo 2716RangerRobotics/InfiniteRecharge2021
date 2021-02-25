@@ -47,11 +47,14 @@ public class BallHandle extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("HandleSensor:", ballSensor.get());
   }
 
   public boolean getBallSensor(){
     return ballSensor.get();
   }
+ 
+
 
   public void setUpperMotors(UpperState state) {
       switch (state) {

@@ -41,7 +41,7 @@ import frc.robot.commands.DriveTurnToAngle3;
 import frc.robot.commands.DriveWithGamePad;
 import frc.robot.commands.LimelightLEDOff;
 import frc.robot.commands.LimelightLEDOn;
-import frc.robot.commands.ShootBalls;
+import frc.robot.commands.CG_ShootBalls;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.ShooterStop;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -162,11 +162,11 @@ public class RobotContainer {
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
     driverDRight.whenPressed(new DriveTurnToAngle3(90));
-    // driverDUp.whenPressed(new DriveStraightToDistance3(60));
-    // driverDDown.whenPressed(new DriveStraightToDistance3(-60));
+    driverDUp.whenPressed(new DriveStraightToDistance3(7));
+    driverDDown.whenPressed(new DriveStraightToDistance3(-7));
     // driverDUp.whenPressed(new DriveStraightToDistance3(3));
-    driverDUp.whenPressed(new DrivePathWeaver("Slalom1"));
-    driverDDown.whileHeld(new DriveStraightToDistanceTest(-.03));
+    // driverDUp.whenPressed(new DrivePathWeaver("Slalom1"));
+    // driverDDown.whileHeld(new DriveStraightToDistanceTest(-.03));
   
     // coDriverA1.whenPressed(new BallHandleIntake());
     // coDriverA1.whenReleased(new BallHandleUpperStop());
