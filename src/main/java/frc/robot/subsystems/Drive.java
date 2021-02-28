@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class Drive extends SubsystemBase {
@@ -76,11 +77,11 @@ public class Drive extends SubsystemBase {
     rightEncoder = rightMotorMaster.getEncoder();
     leftEncoder = leftMotorMaster.getEncoder();                                                                                             
 
-    rightEncoder.setPositionConversionFactor(.04284); //1.6866 - meter conversion value
-    leftEncoder.setPositionConversionFactor(.04284); //1.6866
+    rightEncoder.setPositionConversionFactor(.04509);//.04284); //1.6866 - meter conversion value
+    leftEncoder.setPositionConversionFactor(.04509);//.04284); //1.6866
 
-    rightEncoder.setVelocityConversionFactor(.04284 / 60);
-    leftEncoder.setVelocityConversionFactor(.04284 / 60);
+    rightEncoder.setVelocityConversionFactor(.04509 / 60);
+    leftEncoder.setVelocityConversionFactor(.04509 / 60);
 
     leftMotorMaster.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
     leftMotorFollower.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
@@ -114,6 +115,8 @@ public class Drive extends SubsystemBase {
     // }
     
     currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
+    SmartDashboard.putNumber("XPos", odometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("YPos", odometry.getPoseMeters().getY());
   }
   
   public void setBrakeMode(boolean brakeMode){

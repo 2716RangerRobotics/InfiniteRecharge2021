@@ -22,7 +22,7 @@ public class BallHandle extends SubsystemBase {
     DigitalInput ballSensor;
 
     
-    static final double ROLLER_MOTOR_IN_SPEED = -0.8;
+    static final double ROLLER_MOTOR_IN_SPEED = -0.6;
     static final double ROLLER_MOTOR_OUT_SPEED = 0.6;
 
     public enum UpperState {
@@ -47,11 +47,11 @@ public class BallHandle extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("HandleSensor:", ballSensor.get());
+    SmartDashboard.putBoolean("HandleSensor:", this.getBallSensor());
   }
 
   public boolean getBallSensor(){
-    return ballSensor.get();
+    return !ballSensor.get();
   }
  
 

@@ -25,7 +25,7 @@ public class DrivePathWeaver extends CommandBase {
   Timer timer = new Timer();
   RamseteController ramsete = new RamseteController();
   private final DifferentialDriveKinematics kinematics =
-      new DifferentialDriveKinematics(0.552);
+      new DifferentialDriveKinematics(.0677); //between .1354 and .01354 like .0677 .07447
 
   public DrivePathWeaver(String fileName) {
     // Use addRequirements() here to declare subsystem dependencies.

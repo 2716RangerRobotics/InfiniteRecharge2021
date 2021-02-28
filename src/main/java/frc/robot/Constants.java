@@ -44,8 +44,8 @@ public final class Constants {
 	public static final int TILT_REVERSE_2 = 1;
 
     //motor speeds
-    public static final double UPPER_MOTOR_SPEED = 0.6;
-    public static final double LOWER_MOTOR_SPEED = 0.6;
+    public static final double UPPER_MOTOR_SPEED = 0.5;
+    public static final double LOWER_MOTOR_SPEED = 0.5;
     public static final double CLIMBING_MOTOR_SPEED = 0.3;
     public static final double CLIMBING_EXTENDING_MOTOR_SPEED = 0.3;
     public static final double CLIMBING_RETRACTING_MOTOR_SPEED = -0.4;
@@ -96,7 +96,7 @@ public final class Constants {
     public static final int TOP_BASE_LIMIT = 8;
     public static final int EXTEND_LIMIT = 9;
     // AnalogChannels
-    public static final int DISTANCE_SENSOR_CHANNEL = 0;
+    public static final int DISTANCE_SENSOR_CHANNEL = 3;
 
     //hanging
     public static final double HANGING_RETRACT_POSITION = 0.0;

@@ -153,21 +153,23 @@ public class RobotContainer {
     driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whileHeld(new DriveToWheelPosition());
     //driverRTrigger.whenPressed(new AutoDriveStraight(), false);
-    driverSEL7.whenPressed(new ShooterSetSpeed(70000));
-    driverSEL7.whenReleased(new ShooterStop());
+    // driverSEL7.whenPressed(new ShooterSetSpeed(70000));
+    // driverSEL7.whenReleased(new ShooterStop());
+    driverSEL7.whenPressed(new CG_BallIntakeForShooting());
+    driverSEL7.whenReleased(new BallIntakeHandleStop());
     // driverSEL7.whenPressed(new ColorWheelSpinnerLiftDown());
     // driverSEL7.whenReleased(new ColorWheelSpinnerLiftStop());
-    // driverSTART8.whenPressed(new ColorWheelSpinnerLiftUp());
+    driverSTART8.whenPressed(new CG_ShootBalls(50000));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
     driverDRight.whenPressed(new DriveTurnToAngle3(90));
-    driverDUp.whenPressed(new DriveStraightToDistance3(7));
+    // driverDUp.whenPressed(new DriveStraightToDistance3(7));
     driverDDown.whenPressed(new DriveStraightToDistance3(-7));
     // driverDUp.whenPressed(new DriveStraightToDistance3(3));
-    // driverDUp.whenPressed(new DrivePathWeaver("Slalom1"));
+    driverDUp.whenPressed(new DrivePathWeaver("Slalom1"));
     // driverDDown.whileHeld(new DriveStraightToDistanceTest(-.03));
-  
+    driverLS9.whenPressed(new DriveResetGyro());
     // coDriverA1.whenPressed(new BallHandleIntake());
     // coDriverA1.whenReleased(new BallHandleUpperStop());
     // coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));

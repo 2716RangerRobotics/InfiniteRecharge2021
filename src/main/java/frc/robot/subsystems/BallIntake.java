@@ -28,7 +28,7 @@ public class BallIntake extends SubsystemBase {
     boolean prevBallSensor;
     int ballCount = 0;
 
-    static final double ROLLER_MOTOR_IN_SPEED = -0.95;
+    static final double ROLLER_MOTOR_IN_SPEED = -0.85;
     static final double ROLLER_MOTOR_OUT_SPEED = 0.95;
 
     public enum LowerState {
@@ -42,9 +42,10 @@ public class BallIntake extends SubsystemBase {
     * Creates a new BallIntake.
     */
     public BallIntake() {
-       lowerMotor1 = new VictorSPX(Constants.LOWER_MOTOR_1);
-        lowerMotor2 = new VictorSPX(Constants.LOWER_MOTOR_2);
-        ballSensor = new DigitalInput(Constants.BALL_INTAKE_SENSOR);
+      lowerMotor1 = new VictorSPX(Constants.LOWER_MOTOR_1);
+      lowerMotor2 = new VictorSPX(Constants.LOWER_MOTOR_2);
+      ballSensor = new DigitalInput(Constants.BALL_INTAKE_SENSOR);
+      
     }
 
   @Override
@@ -57,11 +58,11 @@ public class BallIntake extends SubsystemBase {
     // SmartDashboard.putBoolean("Ball Count Sensor", !ballCountSensor.get());
     // SmartDashboard.putNumber("Ball Count", ballCount);
     // prevBallSensor = ballCountSensor.get();
-    SmartDashboard.putBoolean("IntakeSensor:", ballSensor.get());
+    SmartDashboard.putBoolean("IntakeSensor:", this.getBallSensor());
   }
   
   public boolean getBallSensor(){
-    return ballSensor.get();
+    return !ballSensor.get();
   }
 
   public void resetBallCount(){
