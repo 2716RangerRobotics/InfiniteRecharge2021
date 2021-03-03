@@ -160,7 +160,7 @@ public class RobotContainer {
     driverSEL7.whenReleased(new BallIntakeHandleStop());
     // driverSEL7.whenPressed(new ColorWheelSpinnerLiftDown());
     // driverSEL7.whenReleased(new ColorWheelSpinnerLiftStop());
-    driverSTART8.whenPressed(new CG_ShootBalls(50000));
+    driverSTART8.whenPressed(new CG_ShootBalls(57500));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
