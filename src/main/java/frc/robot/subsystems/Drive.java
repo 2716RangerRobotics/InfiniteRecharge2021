@@ -15,6 +15,7 @@ import com.revrobotics.CANEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -36,6 +37,7 @@ public class Drive extends SubsystemBase {
   CANSparkMax rightMotorFollower;
   CANEncoder rightEncoder;
   CANEncoder leftEncoder;
+  Encoder leftDriveEnc;
   private AHRS imu;
   public static final double FeedForward = 0.03;//18;
   public static final double kProportion = 0.018;
@@ -77,11 +79,11 @@ public class Drive extends SubsystemBase {
     rightEncoder = rightMotorMaster.getEncoder();
     leftEncoder = leftMotorMaster.getEncoder();                                                                                             
 
-    rightEncoder.setPositionConversionFactor(.04509);//.04284); //1.6866 - meter conversion value
-    leftEncoder.setPositionConversionFactor(.04509);//.04284); //1.6866
+    rightEncoder.setPositionConversionFactor(.04194);//.04509);//.04284); //1.6866 - meter conversion value
+    leftEncoder.setPositionConversionFactor(.04194);//.04509);//.04284); //1.6866
 
-    rightEncoder.setVelocityConversionFactor(.04509 / 60);
-    leftEncoder.setVelocityConversionFactor(.04509 / 60);
+    rightEncoder.setVelocityConversionFactor(.04194 / 60);
+    leftEncoder.setVelocityConversionFactor(.04194 / 60);
 
     leftMotorMaster.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
     leftMotorFollower.setSmartCurrentLimit(Constants.STALL_LIMIT_DRIVE, Constants.FREE_LIMIT_DRIVE);
@@ -98,8 +100,10 @@ public class Drive extends SubsystemBase {
     spinController = new PIDController(Constants.DRIVE_SPIN_P, Constants.DRIVE_SPIN_I, Constants.DRIVE_SPIN_D);
     spinController.setTolerance(0.01);
     // leftMotorMaster.setOpenLoopRampRate(rate);
-    colorWheelLimit = new DigitalInput(Constants.EXTEND_LIMIT);
+    // colorWheelLimit = new DigitalInput(Constants.EXTEND_LIMIT);
     odometry = new DifferentialDriveOdometry(imu.getRotation2d());
+    leftDriveEnc = new Encoder(Constants.LEFT_DRIVE_ENCODER_A, Constants.LEFT_DRIVE_ENCODER_B);
+    leftDriveEnc.setDistancePerPulse(.000218);
   }
 
   @Override
@@ -109,7 +113,7 @@ public class Drive extends SubsystemBase {
       SmartDashboard.putNumber("Gyro", (int)imu.getYaw());
       SmartDashboard.putNumber("DriveLeftEnc", getLeftPosition());
       SmartDashboard.putNumber("DriveRightEnc", getRightPosition());
-      SmartDashboard.putBoolean("Wheel Contact", !colorWheelLimit.get());
+      SmartDashboard.putNumber("new Encoder", leftDriveEnc.get());
     
 
     // }
@@ -147,16 +151,21 @@ public class Drive extends SubsystemBase {
    * @return the state of the limit switch that touches the color wheel
    */
   public boolean isColorWheelLimit() {
-    if(!colorWheelLimit.get()){
-      return true;
-    }
-    else{
+  //   if(!colorWheelLimit.get()){
+  //     return true;
+  //   }
+  //   else{
       return false;
-    }
   }
 
   public void driveWithSpinPID(double moveSpeed, double targetAngle) {
     double spinOutput = -1.0*spinController.calculate(this.getAngle(), targetAngle);
+    // double FeedForward;
+    // if(Math.abs(this.getAngle()- targetAngle)>10){
+    //   FeedForward = this.FeedForward;
+    // }else{
+    //   FeedForward = 0;
+    // }
     if(spinOutput < 0){
       this.arcadeDrive(moveSpeed,spinOutput - FeedForward, false);
     }else{
@@ -277,6 +286,7 @@ public class Drive extends SubsystemBase {
 
   public void resetLeftEncoder() {
     leftEncoder.setPosition(0.0);
+    leftDriveEnc.reset();
   }
 
   public void resetRightEncoder() {

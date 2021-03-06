@@ -69,8 +69,8 @@ public class ColorWheelSpinner extends SubsystemBase {
     //wheelMotor = new VictorSPX(Constants.WHEEL_MOTOR);
     //liftMotor = new VictorSPX(Constants.LIFT_MOTOR);
     
-    bottomBaseLimit = new DigitalInput(Constants.BOTTOM_BASE_LIMIT);
-    topBaseLimit = new DigitalInput(Constants.TOP_BASE_LIMIT);
+    // bottomBaseLimit = new DigitalInput(Constants.BOTTOM_BASE_LIMIT);
+    // topBaseLimit = new DigitalInput(Constants.TOP_BASE_LIMIT);
     
   }
 
@@ -125,8 +125,8 @@ public class ColorWheelSpinner extends SubsystemBase {
     // SmartDashboard.putNumber("Blue", detectedColor.blue);
     // SmartDashboard.putNumber("Confidence", match.confidence);
     // SmartDashboard.putString("Detected Color", colorString);
-    SmartDashboard.putBoolean("Wheel Bot Lim", !bottomBaseLimit.get());
-    SmartDashboard.putBoolean("Wheel Top Lim", !topBaseLimit.get());
+    // SmartDashboard.putBoolean("Wheel Bot Lim", !bottomBaseLimit.get());
+    // SmartDashboard.putBoolean("Wheel Top Lim", !topBaseLimit.get());
   }
   
   public boolean isBottomBaseLimit() {

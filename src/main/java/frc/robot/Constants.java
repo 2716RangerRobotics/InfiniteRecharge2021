@@ -92,9 +92,11 @@ public final class Constants {
     public static final int LEFT_FRONT_LIMIT = 4;
     public static final int RIGHT_REAR_LIMIT = 5;
     public static final int LEFT_REAR_LIMIT = 6;
-    public static final int BOTTOM_BASE_LIMIT = 7;
-    public static final int TOP_BASE_LIMIT = 8;
-    public static final int EXTEND_LIMIT = 9;
+    public static final int LEFT_DRIVE_ENCODER_A = 7;
+    public static final int LEFT_DRIVE_ENCODER_B = 8;
+    // public static final int BOTTOM_BASE_LIMIT = 7;
+    // public static final int TOP_BASE_LIMIT = 8;
+    // public static final int EXTEND_LIMIT = 9;
     // AnalogChannels
     public static final int DISTANCE_SENSOR_CHANNEL = 3;
 

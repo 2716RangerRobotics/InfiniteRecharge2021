@@ -45,8 +45,8 @@ public class DriveStraightToDistance3 extends CommandBase  {
     targetAngle = RobotContainer.drive.getAngle();
     m_timer.reset();
     m_timer.start();
-    RobotContainer.drive.resetLeftEncoder();
-    RobotContainer.drive.resetRightEncoder();
+    // RobotContainer.drive.resetLeftEncoder();
+    // RobotContainer.drive.resetRightEncoder();
   }
 
   @Override
@@ -82,8 +82,8 @@ public class DriveStraightToDistance3 extends CommandBase  {
   public void end(boolean interrupted) {
     m_timer.stop();
     RobotContainer.drive.arcadeDrive(0, 0, false);
-    RobotContainer.drive.resetLeftEncoder();
-    RobotContainer.drive.resetRightEncoder();
+    // RobotContainer.drive.resetLeftEncoder();
+    // RobotContainer.drive.resetRightEncoder();
   }
 
   @Override

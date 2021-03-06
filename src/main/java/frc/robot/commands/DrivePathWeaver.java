@@ -51,7 +51,7 @@ public class DrivePathWeaver extends CommandBase {
   public void execute() {
     Trajectory.State reference = trajectory.sample(timer.get());
     ChassisSpeeds speeds = ramsete.calculate(RobotContainer.drive.getCurrentPos(), reference);
-    speeds.vyMetersPerSecond = 0.0;
+    // speeds.vyMetersPerSecond = 0.0;
     setSpeeds(kinematics.toWheelSpeeds(speeds));
     // RobotContainer.drive.arcadeDrive(moveValue, rotateValue, squaredInputs);
   }
@@ -77,8 +77,8 @@ public class DrivePathWeaver extends CommandBase {
         RobotContainer.drive.rightPIDController.calculate(
           RobotContainer.drive.getRightVelocity(), speeds.rightMetersPerSecond);
   
-    RobotContainer.drive.setLeftRightMotorOutputs(leftOutput + leftFeedforward,
-      rightOutput + rightFeedforward);
+    RobotContainer.drive.setLeftRightMotorOutputs((leftOutput + leftFeedforward),
+      (rightOutput + rightFeedforward));
       
   }
 }

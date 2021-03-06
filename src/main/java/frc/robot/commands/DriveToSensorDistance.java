@@ -14,13 +14,14 @@ public class DriveToSensorDistance extends InstantCommand {
   double targetDistance;
   public DriveToSensorDistance(double targetDistance) {
     // Use addRequirements() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drive, RobotContainer.shooter);
+    addRequirements(RobotContainer.shooter);
     this.targetDistance = targetDistance;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    new DriveStraightToDistance3(RobotContainer.shooter.getDistance() - targetDistance).schedule();
+    System.out.println("distance to drive:"+ (targetDistance - RobotContainer.shooter.getDistance()));
+    new DriveStraightToDistance3(targetDistance - RobotContainer.shooter.getDistance()).schedule();
   }
 }

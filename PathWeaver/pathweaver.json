@@ -1,8 +1,8 @@
 {
   "lengthUnit": "Meter",
   "exportUnit": "Always Meters",
-  "maxVelocity": 3.8,
-  "maxAcceleration": 0.95,
+  "maxVelocity": 1.75,
+  "maxAcceleration": 0.31,
   "wheelBase": 0.552,
   "gameName": "Slalom Path",
   "outputDir": "../src/main/deploy"

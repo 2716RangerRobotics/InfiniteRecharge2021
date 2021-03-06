@@ -27,5 +27,7 @@ public class DriveResetEncoders extends InstantCommand {
     RobotContainer.drive.resetLeftEncoder();
     RobotContainer.drive.resetRightEncoder();
   }
-
+  public boolean runsWhenDisabled(){
+    return true;
+  }
 }

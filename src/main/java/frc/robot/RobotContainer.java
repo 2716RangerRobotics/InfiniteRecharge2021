@@ -143,10 +143,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driverA1.whenPressed(new BallTiltOut().withTimeout(2.0));
+    // driverA1.whenPressed(new BallTiltOut().withTimeout(2.0));
     driverB2.whenPressed(new BallTiltIn().withTimeout(1.50));
-    driverY4.whenPressed(new BallTiltToScore());
-    driverX3.whenPressed(new BallTiltToPass());
+    // driverY4.whenPressed(new BallTiltToScore());
+    // driverX3.whenPressed(new BallTiltToPass());
     driverRB6.whenPressed(new BallIntakeHandleOuttake());
     driverRB6.whenReleased(new BallIntakeHandleStop());
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
@@ -165,14 +165,19 @@ public class RobotContainer {
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
     driverDRight.whenPressed(new DriveTurnToAngle3(90));
+    // driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
+    // driverDRight.whenPressed(new DriveTurnToAngle3(90));
     // driverDUp.whenPressed(new DriveStraightToDistance3(7));
-    //driverDDown.whenPressed(new DriveStraightToDistance3(-7));
-    driverDDown.whenPressed(new DriveToSensorDistance(1));
-    driverDDown.whenReleased(new DriveStop());
-    // driverDUp.whenPressed(new DriveStraightToDistance3(3));
-    driverDUp.whenPressed(new DrivePathWeaver("Slalom1"));
-    // driverDDown.whileHeld(new DriveStraightToDistanceTest(-.03));
+    driverDDown.whenPressed(new DriveStraightToDistance3(-3));
+    // driverDDown.whenPressed(new DriveToSensorDistance(1));
+    // driverDDown.whenPressed(new DrivePathWeaver("Slalom1"));
+    // driverDDown.whenReleased(new DriveStop());
+    driverDUp.whenPressed(new DriveStraightToDistance3(3));
+    // driverDUp.whenPressed(new DriveStraightToDistance3(-1.5));
+    // driverDUp.whenPressed(new DrivePathWeaver("Slalom2"));
+    // driverDLeft.whileHeld(new DriveStraightToDistanceTest(-.03));
     driverLS9.whenPressed(new DriveResetGyro());
+    driverRS10.whenPressed(new DriveResetEncoders());
     // coDriverA1.whenPressed(new BallHandleIntake());
     // coDriverA1.whenReleased(new BallHandleUpperStop());
     // coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
