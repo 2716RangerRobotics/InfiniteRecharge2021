@@ -41,6 +41,7 @@ public class DrivePathWeaver extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    new DriveBrakeOn();
     timer.reset();
     timer.start();
     RobotContainer.drive.resetOdometry(trajectory.getInitialPose());
