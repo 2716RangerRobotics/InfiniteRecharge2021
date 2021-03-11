@@ -29,6 +29,7 @@ import frc.robot.commands.CG_BallIntakeForShooting;
 import frc.robot.commands.BallTiltToPass;
 import frc.robot.commands.CoDriverIntakeRumble;
 import frc.robot.commands.DrivePathWeaver;
+import frc.robot.commands.DrivePowerPortRun;
 import frc.robot.commands.DriveResetEncoders;
 import frc.robot.commands.DriveResetGyro;
 import frc.robot.commands.DriveStop;
@@ -144,24 +145,24 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // driverA1.whenPressed(new BallTiltOut().withTimeout(2.0));
-    driverB2.whenPressed(new BallTiltIn().withTimeout(1.50));
-    // driverY4.whenPressed(new BallTiltToScore());
-    // driverX3.whenPressed(new BallTiltToPass());
+    driverA1.whenPressed(new DrivePowerPortRun());
+    driverB2.whenPressed(new CG_BallIntakeForShooting());
+    driverY4.whenPressed(new DriveStraightToDistance3(5.1));
+    driverX3.whenPressed(new DrivePathWeaver("DriveStraight", true));
     driverRB6.whenPressed(new BallIntakeHandleOuttake());
     driverRB6.whenReleased(new BallIntakeHandleStop());
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
     driverLB5.whenPressed(new BallIntakeIntake());
     driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whileHeld(new DriveToWheelPosition());
-    //driverRTrigger.whenPressed(new AutoDriveStraight(), false);
+    driverRTrigger.whenPressed(new CG_ShootBalls(62500)); //74 in from the wall w/o bumpers
     // driverSEL7.whenPressed(new ShooterSetSpeed(70000));
     // driverSEL7.whenReleased(new ShooterStop());
     driverSEL7.whenPressed(new CG_BallIntakeForShooting());
     driverSEL7.whenReleased(new BallIntakeHandleStop());
     // driverSEL7.whenPressed(new ColorWheelSpinnerLiftDown());
     // driverSEL7.whenReleased(new ColorWheelSpinnerLiftStop());
-    driverSTART8.whenPressed(new CG_ShootBalls(57500));
+    driverSTART8.whenPressed(new DrivePathWeaver("DriveStraight", false));//57500));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
@@ -171,7 +172,7 @@ public class RobotContainer {
     // driverDUp.whenPressed(new DriveStraightToDistance3(7));
     driverDDown.whenPressed(new DriveStraightToDistance3(-3));
     // driverDDown.whenPressed(new DriveToSensorDistance(1));
-    driverDUp.whenPressed(new DrivePathWeaver("DriveStraight"));
+    // driverDUp.whenPressed(new DrivePathWeaver("DriveStraight"));
     // driverDDown.whenReleased(new DriveStop());
     //driverDUp.whenPressed(new DriveStraightToDistance3(3));
     // driverDUp.whenPressed(new DriveStraightToDistance3(-1.5));

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
@@ -24,10 +25,11 @@ public class DrivePathWeaver extends CommandBase {
   Trajectory trajectory = new Trajectory();
   Timer timer = new Timer();
   RamseteController ramsete = new RamseteController();
+  boolean isReverse = false;
   private final DifferentialDriveKinematics kinematics =
       new DifferentialDriveKinematics(.0677); //between .1354 and .01354 like .0677 .07447
 
-  public DrivePathWeaver(String fileName) {
+  public DrivePathWeaver(String fileName, boolean isReverse) {
     // Use addRequirements() here to declare subsystem dependencies.
     String trajectoryJSON = "output/"+ fileName + ".wpilib.json";
     try {
@@ -36,15 +38,17 @@ public class DrivePathWeaver extends CommandBase {
     } catch (IOException ex) {
       DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
     }
+    this.isReverse= isReverse; 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    new DriveBrakeOn();
+    RobotContainer.drive.setBrakeMode(true);
     timer.reset();
     timer.start();
     RobotContainer.drive.resetOdometry(trajectory.getInitialPose());
+    RobotContainer.drive.setReverse(this.isReverse);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,14 +56,17 @@ public class DrivePathWeaver extends CommandBase {
   public void execute() {
     Trajectory.State reference = trajectory.sample(timer.get());
     ChassisSpeeds speeds = ramsete.calculate(RobotContainer.drive.getCurrentPos(), reference);
-    // speeds.vyMetersPerSecond = 0.0;
+
+    //  speeds.vyMetersPerSecond = 0.0;
     setSpeeds(kinematics.toWheelSpeeds(speeds));
     // RobotContainer.drive.arcadeDrive(moveValue, rotateValue, squaredInputs);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.drive.setReverse(false);
+  }
 
   // Returns true when the command should end.
   @Override

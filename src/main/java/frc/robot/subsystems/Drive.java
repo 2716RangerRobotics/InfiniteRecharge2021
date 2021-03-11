@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -50,7 +51,7 @@ public class Drive extends SubsystemBase {
     new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
   public PIDController rightPIDController =
     new PIDController(Constants.DRIVE_FORWARD_P, Constants.DRIVE_FORWARD_I, Constants.DRIVE_FORWARD_D);
-  
+  public boolean isReverse= false;
   /**
    * Creates a new Drive.
    */
@@ -117,10 +118,18 @@ public class Drive extends SubsystemBase {
     
 
     // }
-    
-    currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
+    if(isReverse){
+      currentPos = odometry.update(imu.getRotation2d().rotateBy(new Rotation2d(Math.PI)),
+        this.getRightPosition() * -1,this.getLeftPosition() * -1);
+    }else{
+      currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
+    }
     SmartDashboard.putNumber("XPos", odometry.getPoseMeters().getX());
     SmartDashboard.putNumber("YPos", odometry.getPoseMeters().getY());
+  }
+
+  public void setReverse(boolean isReverse){
+    this.isReverse = isReverse; 
   }
   
   public void setBrakeMode(boolean brakeMode){
@@ -237,12 +246,22 @@ public class Drive extends SubsystemBase {
       throw new NullPointerException("Null motor provided");
     }
 
-    if (leftMotorMaster != null && leftMotorFollower != null) {
-      leftMotorMaster.set(limit(leftOutput));
-    }
+    if(isReverse){
+      if (leftMotorMaster != null && leftMotorFollower != null) {
+        leftMotorMaster.set(limit(rightOutput * -1));
+      }
 
-    if (rightMotorMaster != null && rightMotorFollower != null) {
-      rightMotorMaster.set(limit(rightOutput));
+      if (rightMotorMaster != null && rightMotorFollower != null) {
+        rightMotorMaster.set(limit(leftOutput * -1));
+      }
+    }else{
+      if (leftMotorMaster != null && leftMotorFollower != null) {
+        leftMotorMaster.set(limit(leftOutput));
+      }
+
+      if (rightMotorMaster != null && rightMotorFollower != null) {
+        rightMotorMaster.set(limit(rightOutput));
+      }
     }
   }
 
