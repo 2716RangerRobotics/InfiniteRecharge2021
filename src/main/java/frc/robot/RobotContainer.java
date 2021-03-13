@@ -42,6 +42,7 @@ import frc.robot.commands.DriveToWheelPosition;
 import frc.robot.commands.DriveTurnToAngle;
 import frc.robot.commands.DriveTurnToAngle3;
 import frc.robot.commands.DriveWithGamePad;
+import frc.robot.commands.DriveWithGamePadReverse;
 import frc.robot.commands.LimelightLEDOff;
 import frc.robot.commands.LimelightLEDOn;
 import frc.robot.commands.CG_ShootBalls;
@@ -154,14 +155,12 @@ public class RobotContainer {
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
     driverLB5.whenPressed(new BallIntakeIntake());
     driverLB5.whenReleased(new BallIntakeIntakeStop());
-    // driverSEL7.whileHeld(new DriveToWheelPosition());
+    driverSEL7.whenPressed(new DriveWithGamePadReverse());
     driverRTrigger.whenPressed(new CG_ShootBalls(62500)); //74 in from the wall w/o bumpers
     // driverSEL7.whenPressed(new ShooterSetSpeed(70000));
     // driverSEL7.whenReleased(new ShooterStop());
-    driverSEL7.whenPressed(new CG_BallIntakeForShooting());
-    driverSEL7.whenReleased(new BallIntakeHandleStop());
-    // driverSEL7.whenPressed(new ColorWheelSpinnerLiftDown());
-    // driverSEL7.whenReleased(new ColorWheelSpinnerLiftStop());
+    // driverSEL7.whenPressed(new CG_BallIntakeForShooting());
+    // driverSEL7.whenReleased(new BallIntakeHandleStop());
     driverSTART8.whenPressed(new DrivePathWeaver("DriveStraight", false));//57500));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 

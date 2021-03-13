@@ -30,6 +30,7 @@ import com.kauailabs.navx.frc.AHRS;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
+// import jdk.javadoc.internal.doclets.toolkit.util.DocFinder.Output;
 
 public class Drive extends SubsystemBase {
   CANSparkMax leftMotorMaster;
@@ -119,8 +120,8 @@ public class Drive extends SubsystemBase {
 
     // }
     if(isReverse){
-      currentPos = odometry.update(imu.getRotation2d().rotateBy(new Rotation2d(Math.PI)),
-        this.getRightPosition() * -1,this.getLeftPosition() * -1);
+      currentPos = odometry.update(imu.getRotation2d(),//.rotateBy(new Rotation2d(Math.PI)),
+        this.getRightPosition()*-1 ,this.getLeftPosition()*-1 );
     }else{
       currentPos = odometry.update(imu.getRotation2d(), this.getLeftPosition(), this.getRightPosition());
     }
@@ -248,11 +249,11 @@ public class Drive extends SubsystemBase {
 
     if(isReverse){
       if (leftMotorMaster != null && leftMotorFollower != null) {
-        leftMotorMaster.set(limit(rightOutput * -1));
+        leftMotorMaster.set(limit(rightOutput*-1));
       }
 
       if (rightMotorMaster != null && rightMotorFollower != null) {
-        rightMotorMaster.set(limit(leftOutput * -1));
+        rightMotorMaster.set(limit(leftOutput*-1));
       }
     }else{
       if (leftMotorMaster != null && leftMotorFollower != null) {
@@ -296,11 +297,19 @@ public class Drive extends SubsystemBase {
   }
 
   public double getRightVelocity(){
-    return  rightEncoder.getVelocity();
+    if(isReverse){
+      return leftEncoder.getVelocity()*-1;
+    }else{
+      return  rightEncoder.getVelocity();
+    }
   }
 
   public double getLeftVelocity(){
-    return  leftEncoder.getVelocity();
+    if(isReverse){
+      return rightEncoder.getVelocity()*-1;
+    }else{
+      return  leftEncoder.getVelocity();
+    }
   }
 
   public void resetLeftEncoder() {
