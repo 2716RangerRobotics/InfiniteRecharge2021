@@ -25,6 +25,7 @@ import frc.robot.commands.BallTiltIn;
 import frc.robot.commands.BallTiltOut;
 import frc.robot.commands.BallTiltStop;
 import frc.robot.commands.BallTiltToScore;
+import frc.robot.commands.BouncePath;
 import frc.robot.commands.CG_BallIntakeForShooting;
 import frc.robot.commands.BallTiltToPass;
 import frc.robot.commands.CoDriverIntakeRumble;
@@ -161,7 +162,7 @@ public class RobotContainer {
     // driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new CG_BallIntakeForShooting());
     // driverSEL7.whenReleased(new BallIntakeHandleStop());
-    driverSTART8.whenPressed(new DrivePathWeaver("DriveStraight", false));//57500));
+    driverSTART8.whenPressed(new BouncePath());//57500));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
