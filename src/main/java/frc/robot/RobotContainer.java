@@ -49,6 +49,7 @@ import frc.robot.commands.LimelightLEDOn;
 import frc.robot.commands.CG_ShootBalls;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.ShooterStop;
+import frc.robot.commands.SlalomPath;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -156,13 +157,13 @@ public class RobotContainer {
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
     driverLB5.whenPressed(new BallIntakeIntake());
     driverLB5.whenReleased(new BallIntakeIntakeStop());
-    driverSEL7.whenPressed(new DriveWithGamePadReverse());
+    // driverSEL7.whenPressed(new DriveWithGamePadReverse());
     driverRTrigger.whenPressed(new CG_ShootBalls(62500)); //74 in from the wall w/o bumpers
     // driverSEL7.whenPressed(new ShooterSetSpeed(70000));
     // driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new CG_BallIntakeForShooting());
     // driverSEL7.whenReleased(new BallIntakeHandleStop());
-    driverSTART8.whenPressed(new BouncePath());//57500));
+    driverSEL7.whenPressed(new SlalomPath());//57500));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
