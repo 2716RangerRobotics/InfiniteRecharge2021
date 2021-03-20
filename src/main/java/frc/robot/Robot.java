@@ -31,11 +31,14 @@ import frc.robot.commands.oldauto.AutoFeedShooter;
 import frc.robot.commands.oldauto.AutoFeederStationPosition;
 import frc.robot.commands.oldauto.AutoLetThemEatBalls;
 import frc.robot.commands.AutoSlalomSimple;
+import frc.robot.commands.BarrelPath;
+import frc.robot.commands.BouncePath;
 import frc.robot.commands.oldauto.AutoSneakAttack;
 import frc.robot.commands.oldauto.AutoSpitAndTurn;
 import frc.robot.commands.oldauto.AutoTwoBallTake;
 import frc.robot.commands.DriveBrakeOn;
 import frc.robot.commands.DriveCoastOn;
+import frc.robot.commands.SlalomPath;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -85,7 +88,10 @@ public class Robot extends TimedRobot {
     //imu = new AHRS(Port.kMXP);
 
     //CommandBase.init();
-
+    
+    chooser.addOption("SlalomPath", new SlalomPath());
+    chooser.addOption("BouncePath", new BouncePath());
+    chooser.addOption("BarrelPath", new BarrelPath());
     chooser.addOption("AutoDriveStraight", new AutoDriveStraight());
     chooser.addOption("AutoDriveBackwards", new AutoDriveBackwards());
     chooser.addOption("AutoDriveAndScore ~13ft~", new AutoDriveTurnAndScore());

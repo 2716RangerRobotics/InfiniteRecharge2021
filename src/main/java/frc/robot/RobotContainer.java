@@ -25,6 +25,7 @@ import frc.robot.commands.BallTiltIn;
 import frc.robot.commands.BallTiltOut;
 import frc.robot.commands.BallTiltStop;
 import frc.robot.commands.BallTiltToScore;
+import frc.robot.commands.BarrelPath;
 import frc.robot.commands.BouncePath;
 import frc.robot.commands.CG_BallIntakeForShooting;
 import frc.robot.commands.BallTiltToPass;
@@ -136,7 +137,7 @@ public class RobotContainer {
     
     // SmartDashboard.putData(drive);
     limelight = new Limelight();
-
+    SmartDashboard.putData(drive);
     // Configure the button bindings - DO THIS LAST!!!
     configureButtonBindings();
   }
@@ -163,7 +164,7 @@ public class RobotContainer {
     // driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new CG_BallIntakeForShooting());
     // driverSEL7.whenReleased(new BallIntakeHandleStop());
-    driverSEL7.whenPressed(new DrivePathWeaver("BarrelPath", false));//57500));
+    driverSEL7.whenPressed(new  BarrelPath());//DrivePathWeaver("BarrelPath", false));//57500));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
     driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
