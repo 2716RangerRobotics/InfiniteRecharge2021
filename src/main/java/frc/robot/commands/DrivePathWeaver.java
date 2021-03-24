@@ -41,6 +41,7 @@ public class DrivePathWeaver extends CommandBase {
     } catch (IOException ex) {
       DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
     }
+    addRequirements(RobotContainer.drive);
 
     this.isReverse= isReverse; 
   }

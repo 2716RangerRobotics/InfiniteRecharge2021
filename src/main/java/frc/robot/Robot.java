@@ -38,6 +38,7 @@ import frc.robot.commands.oldauto.AutoSpitAndTurn;
 import frc.robot.commands.oldauto.AutoTwoBallTake;
 import frc.robot.commands.DriveBrakeOn;
 import frc.robot.commands.DriveCoastOn;
+import frc.robot.commands.DrivePathWeaver;
 import frc.robot.commands.SlalomPath;
 
 /**
@@ -92,21 +93,22 @@ public class Robot extends TimedRobot {
     chooser.addOption("SlalomPath", new SlalomPath());
     chooser.addOption("BouncePath", new BouncePath());
     chooser.addOption("BarrelPath", new BarrelPath());
-    chooser.addOption("AutoDriveStraight", new AutoDriveStraight());
-    chooser.addOption("AutoDriveBackwards", new AutoDriveBackwards());
-    chooser.addOption("AutoDriveAndScore ~13ft~", new AutoDriveTurnAndScore());
-    chooser.addOption("AutoDriveStraightAndScore", new AutoDriveStraightAndScore());
-    chooser.addOption("AutoLetThemEatBalls", new AutoLetThemEatBalls());
-    chooser.addOption("AutoFeederStationPosition", new AutoFeederStationPosition());
-    chooser.addOption("AutoFeedShooter", new AutoFeedShooter());
-    chooser.addOption("AutoTwoBallTake", new AutoTwoBallTake());
-    chooser.addOption("AutoFakeTwoBallTake", new AutoFakeTwoBallTake());
-    chooser.addOption("AutoSneakAttack", new AutoSneakAttack());
-    chooser.addOption("AutoFakeSneakAttack", new AutoFakeSneakAttack());
-    chooser.addOption("AutoDriveToRendezvousAndScore", new AutoDriveToRendezvousAndScore());
-    chooser.addOption("AutoSpitAndTurn", new AutoSpitAndTurn());
-    chooser.addOption("AutoAttackAtAngle", new AutoAttackAtAngle());
-    chooser.addOption("AutoSlalomSimple", new AutoSlalomSimple());
+    chooser.addOption("DriveStraight", new DrivePathWeaver("DriveStraight", false));
+    // chooser.addOption("AutoDriveStraight", new AutoDriveStraight());
+    // chooser.addOption("AutoDriveBackwards", new AutoDriveBackwards());
+    // chooser.addOption("AutoDriveAndScore ~13ft~", new AutoDriveTurnAndScore());
+    // chooser.addOption("AutoDriveStraightAndScore", new AutoDriveStraightAndScore());
+    // chooser.addOption("AutoLetThemEatBalls", new AutoLetThemEatBalls());
+    // chooser.addOption("AutoFeederStationPosition", new AutoFeederStationPosition());
+    // chooser.addOption("AutoFeedShooter", new AutoFeedShooter());
+    // chooser.addOption("AutoTwoBallTake", new AutoTwoBallTake());
+    // chooser.addOption("AutoFakeTwoBallTake", new AutoFakeTwoBallTake());
+    // chooser.addOption("AutoSneakAttack", new AutoSneakAttack());
+    // chooser.addOption("AutoFakeSneakAttack", new AutoFakeSneakAttack());
+    // chooser.addOption("AutoDriveToRendezvousAndScore", new AutoDriveToRendezvousAndScore());
+    // chooser.addOption("AutoSpitAndTurn", new AutoSpitAndTurn());
+    // chooser.addOption("AutoAttackAtAngle", new AutoAttackAtAngle());
+    // chooser.addOption("AutoSlalomSimple", new AutoSlalomSimple());
 		chooser.addOption("None", null);
 
 		SmartDashboard.putData("Auto Mode", chooser);
@@ -160,6 +162,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
       autonomousCommand.schedule();
     }
+    // new DrivePathWeaver("DriveStraight", false).schedule();
   }
 
   /**
@@ -167,7 +170,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    CommandScheduler.getInstance().run();
+    // CommandScheduler.getInstance().run();
   }
 
   @Override
@@ -187,7 +190,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    CommandScheduler.getInstance().run();
+    // CommandScheduler.getInstance().run();
   }
 
   @Override

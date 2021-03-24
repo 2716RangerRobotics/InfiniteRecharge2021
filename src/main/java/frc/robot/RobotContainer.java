@@ -174,7 +174,7 @@ public class RobotContainer {
     // driverDUp.whenPressed(new DriveStraightToDistance3(7));
     driverDDown.whenPressed(new DriveStraightToDistance3(-3));
     // driverDDown.whenPressed(new DriveToSensorDistance(1));
-    // driverDUp.whenPressed(new DrivePathWeaver("DriveStraight"));
+    driverDUp.whenPressed(new DrivePathWeaver("DriveStraight", false));
     // driverDDown.whenReleased(new DriveStop());
     //driverDUp.whenPressed(new DriveStraightToDistance3(3));
     // driverDUp.whenPressed(new DriveStraightToDistance3(-1.5));
