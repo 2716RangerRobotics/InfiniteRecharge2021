@@ -40,6 +40,7 @@ import frc.robot.commands.DriveStraightToDistance2;
 import frc.robot.commands.DriveStraightToDistance3;
 import frc.robot.commands.DriveStraightToDistanceTest;
 import frc.robot.commands.DriveToSensorDistance;
+import frc.robot.commands.DriveToSensorDistance2;
 import frc.robot.commands.DriveToWheelPosition;
 import frc.robot.commands.DriveTurnToAngle;
 import frc.robot.commands.DriveTurnToAngle3;
@@ -149,39 +150,41 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driverA1.whenPressed(new DrivePowerPortRun());
+    //driverA1.whenPressed(new DrivePowerPortRun());
     driverB2.whenPressed(new CG_BallIntakeForShooting());
-    driverY4.whenPressed(new DriveStraightToDistance3(5.1));
-    driverX3.whenPressed(new DrivePathWeaver("DriveStraight", true));
+    //driverY4.whenPressed(new DriveStraightToDistance3(5.1));
+    // driverX3.whenPressed(new DrivePathWeaver("DriveStraight", true));
     driverRB6.whenPressed(new BallIntakeHandleOuttake());
     driverRB6.whenReleased(new BallIntakeHandleStop());
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
-    driverLB5.whenPressed(new BallIntakeIntake());
-    driverLB5.whenReleased(new BallIntakeIntakeStop());
+    // driverLB5.whenPressed(new BallIntakeIntake());
+    // driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whenPressed(new DriveWithGamePadReverse());
     driverRTrigger.whenPressed(new CG_ShootBalls(62500)); //74 in from the wall w/o bumpers
+    driverRTrigger.whenReleased(new ShooterStop().andThen(new BallIntakeHandleStop()));
     // driverSEL7.whenPressed(new ShooterSetSpeed(70000));
     // driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new CG_BallIntakeForShooting());
     // driverSEL7.whenReleased(new BallIntakeHandleStop());
-    driverSEL7.whenPressed(new  BarrelPath());//DrivePathWeaver("BarrelPath", false));//57500));
+    // driverSEL7.whenPressed(new  BarrelPath());//DrivePathWeaver("BarrelPath", false));//57500));
+    driverA1.whenPressed(new DriveToSensorDistance2(1.65));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
-    driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
-    driverDRight.whenPressed(new DriveTurnToAngle3(90));
+    // driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
+    // driverDRight.whenPressed(new DriveTurnToAngle3(90));
     // driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
     // driverDRight.whenPressed(new DriveTurnToAngle3(90));
     // driverDUp.whenPressed(new DriveStraightToDistance3(7));
-    driverDDown.whenPressed(new DriveStraightToDistance3(-3));
+    // driverDDown.whenPressed(new DriveStraightToDistance3(-3));
     // driverDDown.whenPressed(new DriveToSensorDistance(1));
-    driverDUp.whenPressed(new DrivePathWeaver("DriveStraight", false));
+    // driverDUp.whenPressed(new DrivePathWeaver("DriveStraight", false));
     // driverDDown.whenReleased(new DriveStop());
     //driverDUp.whenPressed(new DriveStraightToDistance3(3));
     // driverDUp.whenPressed(new DriveStraightToDistance3(-1.5));
     //driverDUp.whenPressed(new AutoSlalomSimple());
     // driverDLeft.whileHeld(new DriveStraightToDistanceTest(-.03));
-    driverLS9.whenPressed(new DriveResetGyro());
-    driverRS10.whenPressed(new DriveResetEncoders());
+    // driverLS9.whenPressed(new DriveResetGyro());
+    // driverRS10.whenPressed(new DriveResetEncoders());
     // coDriverA1.whenPressed(new BallHandleIntake());
     // coDriverA1.whenReleased(new BallHandleUpperStop());
     // coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));

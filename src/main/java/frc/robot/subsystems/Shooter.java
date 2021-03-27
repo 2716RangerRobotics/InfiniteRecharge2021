@@ -57,7 +57,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getDistance(){
-   return distanceSensor.getAverageVoltage()/0.38582698/.96;
+   return distanceSensor.getAverageVoltage()/0.38582698/.96*1.25;
   }
 
   /**
