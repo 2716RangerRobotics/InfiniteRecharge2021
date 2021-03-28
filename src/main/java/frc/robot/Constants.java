@@ -98,7 +98,7 @@ public final class Constants {
     // public static final int TOP_BASE_LIMIT = 8;
     // public static final int EXTEND_LIMIT = 9;
     // AnalogChannels
-    public static final int DISTANCE_SENSOR_CHANNEL = 3;
+    public static final int DISTANCE_SENSOR_CHANNEL = 2;
 
     //hanging
     public static final double HANGING_RETRACT_POSITION = 0.0;

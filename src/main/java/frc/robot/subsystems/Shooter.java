@@ -65,7 +65,12 @@ public class Shooter extends SubsystemBase {
    * @return this is in native units, per 100ms
    */
   public double getSpeed(){
-    return shooterWheel.getSelectedSensorVelocity();
+    try{
+      return shooterWheel.getSelectedSensorVelocity();
+    }
+    catch(Exception err){
+      return 0.0;
+    }
   } 
 
   /**

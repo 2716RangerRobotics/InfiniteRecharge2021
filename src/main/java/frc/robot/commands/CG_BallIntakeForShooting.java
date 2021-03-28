@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -17,12 +18,18 @@ public class CG_BallIntakeForShooting extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ParallelRaceGroup(
-        new BallIntakeIntake(),
-        new BallHandleIntakeTilBall()
+      new ParallelCommandGroup(
+        new ShooterSetSpeed(-2000),//sets shooter wheel backwards slowly to condition it
+        new SequentialCommandGroup( //all of the intake functions are here 
+          new ParallelRaceGroup(
+            new BallIntakeIntake(),//run the intake in...
+            new BallHandleIntakeTilBall()//...until the ball is ready to shoot
+          ),
+          new WaitCommand(.1),//waits for the second ball
+          new BallIntakeIntakeTilBall()//draws 2nd ball until sensor
+        )
       ),
-      new WaitCommand(.1),
-      new BallIntakeIntakeTilBall()
+      new ShooterStop()//now that the intake is done, stops shooter wheel from spinning
     );
   }
 }

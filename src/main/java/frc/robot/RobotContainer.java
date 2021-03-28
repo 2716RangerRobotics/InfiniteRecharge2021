@@ -152,6 +152,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //driverA1.whenPressed(new DrivePowerPortRun());
     driverB2.whenPressed(new CG_BallIntakeForShooting());
+    driverB2.whenReleased(new BallIntakeHandleStop().andThen(new ShooterStop()));
     //driverY4.whenPressed(new DriveStraightToDistance3(5.1));
     // driverX3.whenPressed(new DrivePathWeaver("DriveStraight", true));
     driverRB6.whenPressed(new BallIntakeHandleOuttake());
