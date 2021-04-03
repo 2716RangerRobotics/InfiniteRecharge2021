@@ -4,6 +4,6 @@
   "maxVelocity": 0.75,
   "maxAcceleration": 0.3,
   "wheelBase": 0.552,
-  "gameName": "Bounce Path",
+  "gameName": "Barrel Racing Path",
   "outputDir": "../src/main/deploy"
 }
