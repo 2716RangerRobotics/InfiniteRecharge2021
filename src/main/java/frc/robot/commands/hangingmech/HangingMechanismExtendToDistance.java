@@ -23,7 +23,6 @@ public class HangingMechanismExtendToDistance extends CommandBase {
     addRequirements(RobotContainer.hangingMechanism);
     this.distance = distance;
     this.speed = speed;
-    this.rumble = rumble;
   }
 
   // Called when the command is initially scheduled.
@@ -34,22 +33,24 @@ public class HangingMechanismExtendToDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-       if(RobotContainer.hangingMechanism.getRightEncoder()>Constants.HANGING_EXTENDING_POSITION){
-        RobotContainer.hangingMechanism.stopRightMotor();
-      } else if(RobotContainer.hangingMechanism.getRightEncoder()>Constants.HANGING_EXTENDING_POSITION-3000){
-        RobotContainer.hangingMechanism.setRightMotor(Constants.CLIMBING_EXTENDING_MOTOR_SPEED);
-        // RobotContainer.setRumbleCoDriver(rumble);
+    if(RobotContainer.hangingMechanism.getRightEncoder()>Constants.HANGING_EXTENDING_POSITION){
+      RobotContainer.hangingMechanism.stopRightMotor();
+    } else if(RobotContainer.hangingMechanism.getRightEncoder()>Constants.HANGING_EXTENDING_POSITION-3000){
+      RobotContainer.hangingMechanism.setRightMotor(Constants.CLIMBING_EXTENDING_MOTOR_SPEED);
+      
     } else {
       RobotContainer.hangingMechanism.setRightMotor(0.60);
     }
+
     if(RobotContainer.hangingMechanism.getLeftEncoder()>Constants.HANGING_EXTENDING_POSITION){
       RobotContainer.hangingMechanism.stopLeftMotor();
     } else if(RobotContainer.hangingMechanism.getLeftEncoder()>Constants.HANGING_EXTENDING_POSITION-3000){
       RobotContainer.hangingMechanism.setLeftMotor(Constants.CLIMBING_EXTENDING_MOTOR_SPEED);
-      // RobotContainer.setRumbleCoDriver(rumble);
+    
   } else {
     RobotContainer.hangingMechanism.setLeftMotor(0.60);
   }
+
     //    if(RobotContainer.hangingMechanism.getRightEncoder()<Constants.HANGING_EXTENDING_POSITION){
     //   RobotContainer.hangingMechanism.setRightMotor(Constants.CLIMBING_EXTENDING_MOTOR_SPEED);
     // } else {

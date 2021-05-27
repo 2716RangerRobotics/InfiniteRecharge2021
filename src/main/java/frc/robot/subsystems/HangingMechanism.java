@@ -20,35 +20,37 @@ import edu.wpi.first.wpilibj.Servo;
 import frc.robot.Constants;
 
 public class HangingMechanism extends SubsystemBase {
- TalonSRX leftHangingMotor;
- TalonSRX rightHangingMotor;
- Servo rightServo;
- Servo leftServo;
-//  Encoder leftHangingEncoder;
-//  Encoder rightHangingEncoder;
+  TalonSRX leftHangingMotor;
+  TalonSRX rightHangingMotor;
+  Servo rightServo;
+  Servo leftServo;
+  //  Encoder leftHangingEncoder;
+  //  Encoder rightHangingEncoder;
 
-static final double HANGING_EXTEND_POSITION = 1000000.0;
-static final double HANGING_RETRACT_POSITION = -1000000.0;
+  static final double HANGING_EXTEND_POSITION = 1000000.0;
+  static final double HANGING_RETRACT_POSITION = -1000000.0;
 
   public HangingMechanism() {
     leftServo = new Servo(Constants.HANGING_MECH_LEFT_SERVO);
     rightServo = new Servo(Constants.HANGING_MECH_RIGHT_SERVO);
 
-    // leftHangingMotor = new TalonSRX(Constants.CLIMBING_LEFT_MOTOR);
-    // leftHangingMotor.setInverted(true);
-    // rightHangingMotor = new TalonSRX(Constants.CLIMBING_RIGHT_MOTOR);
-    // leftHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    // rightHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    // leftHangingMotor.configFactoryDefault();
-    // leftHangingMotor.configVoltageCompSaturation(12.5);
-    // leftHangingMotor.enableVoltageCompensation(true);
-    // rightHangingMotor.configFactoryDefault();
-    // rightHangingMotor.configVoltageCompSaturation(12.5);
-    // rightHangingMotor.enableVoltageCompensation(true);
-    // resetLeftEncoder();
-    // resetRightEncoder();
+    leftHangingMotor = new TalonSRX(Constants.CLIMBING_LEFT_MOTOR);
+    leftHangingMotor.configFactoryDefault();
+    leftHangingMotor.setInverted(true);
+    rightHangingMotor = new TalonSRX(Constants.CLIMBING_RIGHT_MOTOR);
+    rightHangingMotor.configFactoryDefault();
+    rightHangingMotor.setInverted(true);
+    leftHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    rightHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    rightHangingMotor.setSensorPhase(true);
+    leftHangingMotor.configVoltageCompSaturation(12.5);
+    leftHangingMotor.enableVoltageCompensation(true);
+    rightHangingMotor.configVoltageCompSaturation(12.5);
+    rightHangingMotor.enableVoltageCompensation(true);
+    resetLeftEncoder();
+    resetRightEncoder();
 
-    //leftHangingMotor.config_kP(0, 1.0);
+    // leftHangingMotor.config_kP(0, 1.0);
     // leftHangingMotor.config_kI(0, 0.0);
     // leftHangingMotor.config_kD(0, 0.0);
     // leftHangingMotor.config_kF(0, 0.0);
@@ -89,14 +91,14 @@ static final double HANGING_RETRACT_POSITION = -1000000.0;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("ClimbLeftEnc", getLeftEncoder());
-    // SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
+    SmartDashboard.putNumber("ClimbLeftEnc", getLeftEncoder());
+    SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
   }
 
-public void hangingExtendDistance(){
-  leftHangingMotor(ControlMode.PercentOutput, HANGING_EXTEND_POSITION);
-  rightHangingMotor(ControlMode.PercentOutput, HANGING_EXTEND_POSITION);
-}
+  public void hangingExtendDistance(){
+    leftHangingMotor(ControlMode.PercentOutput, HANGING_EXTEND_POSITION);
+    rightHangingMotor(ControlMode.PercentOutput, HANGING_EXTEND_POSITION);
+  }
 
   private void rightHangingMotor(ControlMode percentoutput, double hangingExtendPosition) {
     if(getRightEncoder() >= HANGING_EXTEND_POSITION){
@@ -109,24 +111,28 @@ public void hangingExtendDistance(){
       stopLeftMotor();
     }
   }
-public void hangingRetractDistance(){
+
+  public void hangingRetractDistance(){
     leftHangingMotorRetract(ControlMode.PercentOutput, HANGING_RETRACT_POSITION);
     rightHangingMotorRetract(ControlMode.PercentOutput, HANGING_RETRACT_POSITION);
   }
+
   private void rightHangingMotorRetract(ControlMode percentoutput, double hangingRetractPosition) {
     if(getRightEncoder() <= HANGING_RETRACT_POSITION){
       //stopRightMotor();
     }
   }
+
   private void leftHangingMotorRetract(ControlMode percentoutput, double hangingRetractPosition){
     if(getLeftEncoder() <= HANGING_RETRACT_POSITION){
       //stopLeftMotor();
+    }
   }
-}
 
   public void resetLeftEncoder() {
     leftHangingMotor.setSelectedSensorPosition(-350);
   }
+
   public void resetRightEncoder() {
     rightHangingMotor.setSelectedSensorPosition(-350);
   }

@@ -7,24 +7,28 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
 public class CoDriverIntakeRumble extends CommandBase {
+  Timer timer = new Timer();
   /**
    * Creates a new CoDriverIntakeRumble.
    */
   public CoDriverIntakeRumble() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.ballIntake);
+    // addRequirements(RobotContainer.ballIntake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
     RobotContainer.setRumbleCoDriver(.25);
-    RobotContainer.setRumbleTimeCoDriver(1.0);
+    // RobotContainer.setRumbleTimeCoDriver(1.0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,6 +39,7 @@ public class CoDriverIntakeRumble extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    timer.stop();
     RobotContainer.setRumbleCoDriver(0.0);
     RobotContainer.setRumbleTimeCoDriver(0.0);
   }
@@ -42,6 +47,6 @@ public class CoDriverIntakeRumble extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return timer.get() > 1.0;
   }
 }

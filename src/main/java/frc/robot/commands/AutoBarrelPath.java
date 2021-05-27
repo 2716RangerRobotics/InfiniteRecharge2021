@@ -18,7 +18,8 @@ public class AutoBarrelPath extends SequentialCommandGroup {
       new DrivePathWeaver("2BarrelPathpt1", false),
       new DrivePathWeaver("2BarrelPathpt2", false),
       new DrivePathWeaver("2BarrelPathpt3", false),
-      new DrivePathWeaver("2BarrelPathpt4", false)
+      new DrivePathWeaver("2BarrelPathpt4", false),
+      new DrivePathWeaver("2BarrelPathpt5", false)
     );
   }
 }

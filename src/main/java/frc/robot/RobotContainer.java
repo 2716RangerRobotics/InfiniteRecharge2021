@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutoBarrelPath;
 import frc.robot.commands.AutoSlalomSimple;
 import frc.robot.commands.BallHandleIntake;
 import frc.robot.commands.BallHandleUpperStop;
@@ -52,6 +53,14 @@ import frc.robot.commands.CG_ShootBalls;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.ShooterStop;
 import frc.robot.commands.SlalomPath;
+import frc.robot.commands.hangingmech.HangingMechanismExtendToDistance;
+import frc.robot.commands.hangingmech.HangingMechanismRelease;
+import frc.robot.commands.hangingmech.HangingMechanismResetEnc;
+import frc.robot.commands.hangingmech.HangingMechanismResetServo;
+import frc.robot.commands.hangingmech.HangingMechanismRetract;
+import frc.robot.commands.hangingmech.HangingMechanismSetEnc;
+import frc.robot.commands.hangingmech.HangingMechanismSetServo;
+import frc.robot.commands.hangingmech.HangingMechanismStop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -102,24 +111,24 @@ public class RobotContainer {
 	static Button driverRTrigger = new TriggerButton(driverPad, Hand.kRight);
 	// static Button driverStartSelect = new DoubleButton(driverSEL7, driverSTART8);
   
-  // private static XboxController coDriverPad = new XboxController(1);
-  // static Button coDriverA1 = new JoystickButton(coDriverPad, 1);
-	// static Button coDriverB2 = new JoystickButton(coDriverPad, 2);
-	// static Button coDriverX3 = new JoystickButton(coDriverPad, 3);
-	// static Button coDriverY4 = new JoystickButton(coDriverPad, 4);
-	// static Button coDriverLB5 = new JoystickButton(coDriverPad, 5);
-	// static Button coDriverRB6 = new JoystickButton(coDriverPad, 6);
-	// static Button coDriverSEL7 = new JoystickButton(coDriverPad, 7);
-	// static Button coDriverSTART8 = new JoystickButton(coDriverPad, 8);
-	// static Button coDriverLS9 = new JoystickButton(coDriverPad, 9);
-	// static Button coDriverRS10 = new JoystickButton(coDriverPad, 10);
-	// static Button coDriverDLeft = new DPadButton(coDriverPad, DPadButton.Value.kDPadLeft);
-	// static Button coDriverDUp = new DPadButton(coDriverPad, DPadButton.Value.kDPadUp);
-	// static Button coDriverDDown = new DPadButton(coDriverPad, DPadButton.Value.kDPadDown);
-	// static Button coDriverDRight = new DPadButton(coDriverPad, DPadButton.Value.kDPadRight);
-	// static Button coDriverLTrigger = new TriggerButton(coDriverPad, Hand.kLeft);
-	// static Button coDriverRTrigger = new TriggerButton(coDriverPad, Hand.kRight);
-	// static Button coDriverLTriggerRTrigger = new DoubleButton(coDriverLTrigger, coDriverRTrigger);
+  private static XboxController coDriverPad = new XboxController(1);
+  static Button coDriverA1 = new JoystickButton(coDriverPad, 1);
+	static Button coDriverB2 = new JoystickButton(coDriverPad, 2);
+	static Button coDriverX3 = new JoystickButton(coDriverPad, 3);
+	static Button coDriverY4 = new JoystickButton(coDriverPad, 4);
+	static Button coDriverLB5 = new JoystickButton(coDriverPad, 5);
+	static Button coDriverRB6 = new JoystickButton(coDriverPad, 6);
+	static Button coDriverSEL7 = new JoystickButton(coDriverPad, 7);
+	static Button coDriverSTART8 = new JoystickButton(coDriverPad, 8);
+	static Button coDriverLS9 = new JoystickButton(coDriverPad, 9);
+	static Button coDriverRS10 = new JoystickButton(coDriverPad, 10);
+	static Button coDriverDLeft = new DPadButton(coDriverPad, DPadButton.Value.kDPadLeft);
+	static Button coDriverDUp = new DPadButton(coDriverPad, DPadButton.Value.kDPadUp);
+	static Button coDriverDDown = new DPadButton(coDriverPad, DPadButton.Value.kDPadDown);
+	static Button coDriverDRight = new DPadButton(coDriverPad, DPadButton.Value.kDPadRight);
+	static Button coDriverLTrigger = new TriggerButton(coDriverPad, Hand.kLeft);
+	static Button coDriverRTrigger = new TriggerButton(coDriverPad, Hand.kRight);
+	static Button coDriverLTriggerRTrigger = new DoubleButton(coDriverLTrigger, coDriverRTrigger);
 
 
   /**
@@ -150,55 +159,49 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //driverA1.whenPressed(new DrivePowerPortRun());
-    driverB2.whenPressed(new CG_BallIntakeForShooting());
-    driverB2.whenReleased(new BallIntakeHandleStop().andThen(new ShooterStop()));
-    driverY4.whenPressed(new DrivePathWeaver("2BarrelPathpt4", false));
-    // driverX3.whenPressed(new DrivePathWeaver("DriveStraight", true));
+    driverA1.whenPressed(new BallTiltOut().withTimeout(2.0));
+    driverB2.whenPressed(new BallTiltIn().withTimeout(1.50));
+    driverY4.whenPressed(new BallTiltToScore());
+    driverX3.whenPressed(new BallTiltToPass());
     driverRB6.whenPressed(new BallIntakeHandleOuttake());
     driverRB6.whenReleased(new BallIntakeHandleStop());
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
     // driverLB5.whenPressed(new BallIntakeIntake());
     // driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whenPressed(new DriveWithGamePadReverse());
-    driverRTrigger.whenPressed(new CG_ShootBalls(62500)); //74 in from the wall w/o bumpers
+    driverRTrigger.whenPressed(new CG_ShootBalls(55000)); //74 in from the wall w/o bumpers
     driverRTrigger.whenReleased(new ShooterStop().andThen(new BallIntakeHandleStop()));
+    driverLTrigger.whenPressed(new CG_BallIntakeForShooting());
+    driverLTrigger.whenReleased(new BallIntakeHandleStop().andThen(new ShooterStop()));
     // driverSEL7.whenPressed(new ShooterSetSpeed(70000));
     // driverSEL7.whenReleased(new ShooterStop());
     // driverSEL7.whenPressed(new CG_BallIntakeForShooting());
     // driverSEL7.whenReleased(new BallIntakeHandleStop());
     // driverSEL7.whenPressed(new  BarrelPath());//DrivePathWeaver("BarrelPath", false));//57500));
-    driverA1.whenPressed(new DriveToSensorDistance2(1.65));
+    // driverA1.whenPressed(new DriveToSensorDistance2(1.65));
     // driverSTART8.whenReleased(new ColorWheelSpinnerLiftStop());
 
-    // driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
-    // driverDRight.whenPressed(new DriveTurnToAngle3(90));
-    // driverDLeft.whenPressed(new DriveTurnToAngle3(-90));
-    // driverDRight.whenPressed(new DriveTurnToAngle3(90));
-    // driverDUp.whenPressed(new DriveStraightToDistance3(7));
-    // driverDDown.whenPressed(new DriveStraightToDistance3(-3));
-    // driverDDown.whenPressed(new DriveToSensorDistance(1));
-    // driverDUp.whenPressed(new DrivePathWeaver("DriveStraight", false));
-    // driverDDown.whenReleased(new DriveStop());
-    //driverDUp.whenPressed(new DriveStraightToDistance3(3));
-    // driverDUp.whenPressed(new DriveStraightToDistance3(-1.5));
-    //driverDUp.whenPressed(new AutoSlalomSimple());
-    // driverDLeft.whileHeld(new DriveStraightToDistanceTest(-.03));
     // driverLS9.whenPressed(new DriveResetGyro());
     // driverRS10.whenPressed(new DriveResetEncoders());
-    // coDriverA1.whenPressed(new BallHandleIntake());
-    // coDriverA1.whenReleased(new BallHandleUpperStop());
-    // coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
+
+    /********* CoDriver Buttons*/
+
+    coDriverA1.whenPressed(new BallHandleIntake());
+    coDriverA1.whenReleased(new BallHandleUpperStop());
+    coDriverB2.whenPressed(new BallTiltIn().withTimeout(1.5));
+    //coDriverLTrigger.whenPressed(new HangingMechanismResetEnc());
+    //coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
     // coDriverY4.whenPressed(new DriveResetEncoders());
     // coDriverLTrigger.whenPressed(new ShootBalls(70000));
     // coDriverLTrigger.whenReleased(new ShooterStop());
-    // // coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
+    coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
     // // coDriverB2.whenPressed(new BallIntakeUpperState());
-    // // coDriverX3.whenPressed(new HangingMechanismRetract());
-    // // coDriverX3.whenReleased(new HangingMechanismStop());
-    // // coDriverY4.whenPressed(new HangingMechanismExtendToDistance(100000, 0.3));
-    // // coDriverY4.whenReleased(new HangingMechanismStop());
-    // // coDriverRB6.whenPressed(new HangingMechanismSetServo());
+    coDriverX3.whenPressed(new HangingMechanismRetract());
+    coDriverX3.whenReleased(new HangingMechanismStop());
+    coDriverY4.whenPressed(new HangingMechanismExtendToDistance(100000, 0.3));
+    coDriverY4.whenReleased(new HangingMechanismStop());
+    coDriverRB6.whenPressed(new HangingMechanismSetServo());
+    coDriverLB5.whenPressed(new HangingMechanismResetServo());
     // coDriverLB5.whenPressed(new CG_BallIntakeForShooting());
     // coDriverLB5.whenReleased(new BallIntakeHandleStop());
     // // coDriverDLeft.whenPressed(new ColorWheelSpinnerRotationWheel());
@@ -212,7 +215,7 @@ public class RobotContainer {
     // // coDriverLTrigger.whenPressed(new LimelightLEDOff());
     // // coDriverRTrigger.whenPressed(new LimelightLEDOn());
     // // coDriverSEL7.whenReleased(new ColorWheelSpinnerLiftStop()); //not sure if we need
-    // //coDriverLTriggerRTrigger.whenPressed(new HangingMechanismRelease());
+    // coDriverLTriggerRTrigger.whenPressed(new HangingMechanismRelease());
   }
 
 
@@ -309,8 +312,8 @@ public class RobotContainer {
   }
 
   public static void setRumbleCoDriver(double rumble) {
-    // coDriverPad.setRumble(RumbleType.kLeftRumble, rumble);
-    // coDriverPad.setRumble(RumbleType.kRightRumble, rumble);
+    coDriverPad.setRumble(RumbleType.kLeftRumble, rumble);
+    coDriverPad.setRumble(RumbleType.kRightRumble, rumble);
   }
   public static void setRumbleTimeCoDriver(double time){
     // coDriverPad.setRumble(RumbleType.kLeftRumble, time);

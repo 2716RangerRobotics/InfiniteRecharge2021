@@ -28,7 +28,7 @@ public final class Constants {
     public static final int UPPER_MOTOR_2 = 10;
     public static final int LOWER_MOTOR_1 = 4;
     public static final int LOWER_MOTOR_2 = 9;
-    public static final int CLIMBING_LEFT_MOTOR = 2;
+    public static final int CLIMBING_LEFT_MOTOR = 20;
     public static final int CLIMBING_RIGHT_MOTOR = 30;
     public static final int WHEEL_MOTOR = 6;
     public static final int LIFT_MOTOR = 5;
@@ -57,7 +57,7 @@ public final class Constants {
     public static final int SLOW_FREE_LIMIT_DRIVE = 15;
     public static final double RAMP_RATE = .01;
     public static final double DRIVE_SLOW_SPEED = 0.5;
-    public static final double TURN_SLOW_SPEED = 0.7;
+    public static final double TURN_SLOW_SPEED = 0.85;
 
     public static final double LEFT_MOTOR_MASTER_TEST = 0.3;
     public static final double RIGHT_MOTOR_MASTER_TEST = 0.3;
