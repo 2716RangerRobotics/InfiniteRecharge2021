@@ -166,8 +166,8 @@ public class RobotContainer {
     driverRB6.whenPressed(new BallIntakeHandleOuttake());
     driverRB6.whenReleased(new BallIntakeHandleStop());
     // driverRB6.whenReleased(new CoDriverIntakeRumble());
-    // driverLB5.whenPressed(new BallIntakeIntake());
-    // driverLB5.whenReleased(new BallIntakeIntakeStop());
+    driverLB5.whenPressed(new BallIntakeIntake());
+    driverLB5.whenReleased(new BallIntakeIntakeStop());
     // driverSEL7.whenPressed(new DriveWithGamePadReverse());
     driverRTrigger.whenPressed(new CG_ShootBalls(55000)); //74 in from the wall w/o bumpers
     driverRTrigger.whenReleased(new ShooterStop().andThen(new BallIntakeHandleStop()));

@@ -31,6 +31,7 @@ import frc.robot.commands.oldauto.AutoFeedShooter;
 import frc.robot.commands.oldauto.AutoFeederStationPosition;
 import frc.robot.commands.oldauto.AutoLetThemEatBalls;
 import frc.robot.commands.AutoBarrelPath;
+import frc.robot.commands.AutoDriveAndShoot;
 import frc.robot.commands.AutoSlalomSimple;
 import frc.robot.commands.BarrelPath;
 import frc.robot.commands.BouncePath;
@@ -96,6 +97,7 @@ public class Robot extends TimedRobot {
     chooser.addOption("BarrelPath", new BarrelPath());
     chooser.addOption("DriveStraight", new DrivePathWeaver("DriveStraight", false));
     chooser.addOption("CoolerBarrelPath", new AutoBarrelPath());
+    chooser.addOption("AutoDriveAndShoot", new AutoDriveAndShoot());
     // chooser.addOption("AutoDriveStraight", new AutoDriveStraight());
     // chooser.addOption("AutoDriveBackwards", new AutoDriveBackwards());
     // chooser.addOption("AutoDriveAndScore ~13ft~", new AutoDriveTurnAndScore());
