@@ -15,6 +15,8 @@ import java.util.ResourceBundle.Control;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Servo;
 
 import frc.robot.Constants;
@@ -47,7 +49,10 @@ public class HangingMechanism extends SubsystemBase {
     leftHangingMotor.enableVoltageCompensation(true);
     rightHangingMotor.configVoltageCompSaturation(12.5);
     rightHangingMotor.enableVoltageCompensation(true);
-    resetLeftEncoder();
+    leftHangingMotor.setSelectedSensorPosition(
+        Preferences.getInstance().getDouble("ClimbLeftEnc", 0.0));
+    
+    // resetLeftEncoder();
     resetRightEncoder();
 
     // leftHangingMotor.config_kP(0, 1.0);
@@ -91,8 +96,17 @@ public class HangingMechanism extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("ClimbLeftEnc", getLeftEncoder());
+    double leftEncValue = getLeftEncoder();
+    if(leftHangingMotor.hasResetOccurred()){
+      leftHangingMotor.setSelectedSensorPosition(
+        Preferences.getInstance().getDouble("ClimbLeftEnc", leftEncValue));
+    }else{
+      SmartDashboard.putNumber("ClimbLeftEnc", leftEncValue);
+      Preferences.getInstance().putDouble("ClimbLeftEnc", leftEncValue);
+    }
+    
     SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
+    
   }
 
   public void hangingExtendDistance(){
