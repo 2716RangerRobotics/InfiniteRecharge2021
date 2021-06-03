@@ -129,7 +129,7 @@ public class RobotContainer {
 	static Button coDriverLTrigger = new TriggerButton(coDriverPad, Hand.kLeft);
 	static Button coDriverRTrigger = new TriggerButton(coDriverPad, Hand.kRight);
 	static Button coDriverLTriggerRTrigger = new DoubleButton(coDriverLTrigger, coDriverRTrigger);
-
+  static Button codriverStartSelect = new DoubleButton(coDriverSEL7, coDriverSTART8);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -192,10 +192,7 @@ public class RobotContainer {
     //coDriverLTrigger.whenPressed(new HangingMechanismResetEnc());
     //coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
     // coDriverY4.whenPressed(new DriveResetEncoders());
-    // coDriverLTrigger.whenPressed(new ShootBalls(70000));
-    // coDriverLTrigger.whenReleased(new ShooterStop());
-    coDriverRTrigger.whenPressed(new HangingMechanismSetEnc());
-    // // coDriverB2.whenPressed(new BallIntakeUpperState());
+    // coDriverB2.whenPressed(new BallIntakeUpperState());
     coDriverX3.whenPressed(new HangingMechanismRetract());
     coDriverX3.whenReleased(new HangingMechanismStop());
     coDriverY4.whenPressed(new HangingMechanismExtendToDistance(100000, 0.3));
@@ -204,18 +201,15 @@ public class RobotContainer {
     coDriverLB5.whenPressed(new HangingMechanismResetServo());
     // coDriverLB5.whenPressed(new CG_BallIntakeForShooting());
     // coDriverLB5.whenReleased(new BallIntakeHandleStop());
-    // // coDriverDLeft.whenPressed(new ColorWheelSpinnerRotationWheel());
-    // //coDriverDLeft.whenReleased(new ColorWheelSpinnerWheelStop()); //do we need this for this command?
-    // // coDriverDRight.whenPressed(new ColorWheelSpinnerColorRotation());
-    // // coDriverDUp.whenPressed(new ColorWheelSpinnerLiftUp());
-    // // coDriverDUp.whenReleased(new ColorWheelSpinnerLiftStop());
-    // // coDriverDDown.whenPressed(new ColorWheelSpinnerLiftDown());
-    // // coDriverDDown.whenReleased(new ColorWheelSpinnerLiftStop());
-    // coDriverSEL7.whenPressed(new DriveResetGyro());
-    // // coDriverLTrigger.whenPressed(new LimelightLEDOff());
-    // // coDriverRTrigger.whenPressed(new LimelightLEDOn());
-    // // coDriverSEL7.whenReleased(new ColorWheelSpinnerLiftStop()); //not sure if we need
-    // coDriverLTriggerRTrigger.whenPressed(new HangingMechanismRelease());
+    // coDriverDLeft.whenPressed(new ColorWheelSpinnerRotationWheel());
+    //coDriverDLeft.whenReleased(new ColorWheelSpinnerWheelStop()); //do we need this for this command?
+    // coDriverDRight.whenPressed(new ColorWheelSpinnerColorRotation());
+    // coDriverDUp.whenPressed(new ColorWheelSpinnerLiftUp());
+    // coDriverDUp.whenReleased(new ColorWheelSpinnerLiftStop());
+    // coDriverDDown.whenPressed(new ColorWheelSpinnerLiftDown());
+    // coDriverDDown.whenReleased(new ColorWheelSpinnerLiftStop());
+    coDriverLTriggerRTrigger.whenPressed(new HangingMechanismSetEnc());
+    codriverStartSelect.whenPressed(new HangingMechanismResetEnc());
   }
 
 

@@ -14,6 +14,7 @@ import java.util.ResourceBundle.Control;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Preferences;
@@ -38,9 +39,11 @@ public class HangingMechanism extends SubsystemBase {
 
     leftHangingMotor = new TalonSRX(Constants.CLIMBING_LEFT_MOTOR);
     leftHangingMotor.configFactoryDefault();
+    leftHangingMotor.setNeutralMode(NeutralMode.Brake);
     leftHangingMotor.setInverted(true);
     rightHangingMotor = new TalonSRX(Constants.CLIMBING_RIGHT_MOTOR);
     rightHangingMotor.configFactoryDefault();
+    rightHangingMotor.setNeutralMode(NeutralMode.Brake);
     rightHangingMotor.setInverted(true);
     leftHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     rightHangingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -51,9 +54,11 @@ public class HangingMechanism extends SubsystemBase {
     rightHangingMotor.enableVoltageCompensation(true);
     leftHangingMotor.setSelectedSensorPosition(
         Preferences.getInstance().getDouble("ClimbLeftEnc", 0.0));
+    rightHangingMotor.setSelectedSensorPosition(
+        Preferences.getInstance().getDouble("ClimbRightEnc", 0.0));
     
     // resetLeftEncoder();
-    resetRightEncoder();
+    // resetRightEncoder();
 
     // leftHangingMotor.config_kP(0, 1.0);
     // leftHangingMotor.config_kI(0, 0.0);
@@ -104,8 +109,17 @@ public class HangingMechanism extends SubsystemBase {
       SmartDashboard.putNumber("ClimbLeftEnc", leftEncValue);
       Preferences.getInstance().putDouble("ClimbLeftEnc", leftEncValue);
     }
+
+    double rightEncValue = getRightEncoder();
+    if(rightHangingMotor.hasResetOccurred()){
+      rightHangingMotor.setSelectedSensorPosition(
+        Preferences.getInstance().getDouble("ClimbRightEnc", rightEncValue));
+    }else{
+      SmartDashboard.putNumber("ClimbRightEnc", rightEncValue);
+      Preferences.getInstance().putDouble("ClimbRightEnc", rightEncValue);
+    }
     
-    SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
+    // SmartDashboard.putNumber("ClimbRightEnc", getRightEncoder());
     
   }
 
